@@ -6,14 +6,34 @@ require('dotenv').config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Middleware for parsing JSON and enabling CORS
-app.use(express.json());
-app.use(cors({
-  origin: '*',
-  methods: ['GET', 'POST', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Accept', 'Origin'],
+// CORS configuration
+const corsOptions = {
+  origin: [
+    'http://localhost:3000',
+    'http://localhost:3001',
+    'http://localhost:3002',
+    'https://yarenbulut.com',
+    'https://www.yarenbulut.com',
+    'https://my-portfolio-yb.vercel.app'
+  ],
+  methods: ['POST', 'GET', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Accept'],
+  credentials: true,
   optionsSuccessStatus: 200
-}));
+};
+
+// Apply CORS middleware
+app.use(cors(corsOptions));
+
+// Handle preflight requests
+app.options('*', cors(corsOptions));
+
+app.use(express.json());
+
+// Test route
+app.get('/', (req, res) => {
+  res.json({ status: 'Backend is running', cors: 'enabled' });
+});
 
 // Email configuration
 const transporter = nodemailer.createTransport({
@@ -22,11 +42,6 @@ const transporter = nodemailer.createTransport({
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS
   }
-});
-
-// Health check endpoint
-app.get('/', (req, res) => {
-  res.json({ status: 'Backend is running' });
 });
 
 // Contact form endpoint
