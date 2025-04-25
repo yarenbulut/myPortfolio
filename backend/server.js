@@ -6,23 +6,19 @@ require('dotenv').config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// CORS configuration
-app.use(cors({
-  origin: [
-    'http://localhost:3001',
-    'http://192.168.1.162:3001',
-    'https://yarenbulut.com',
-    'https://www.yarenbulut.com',
-    'https://my-portfolio-yb.vercel.app'
-  ],
-  methods: ['GET', 'POST', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Accept', 'Origin', 'Authorization'],
-  credentials: true,
-  optionsSuccessStatus: 200
-}));
+// Enable CORS for all routes
+app.use(cors());
 
-// Pre-flight requests
-app.options('*', cors());
+// Additional CORS headers for specific routes
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Accept, Origin');
+  if (req.method === 'OPTIONS') {
+    return res.sendStatus(200);
+  }
+  next();
+});
 
 app.use(express.json());
 

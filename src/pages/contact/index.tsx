@@ -67,32 +67,30 @@ const Contact = () => {
       return;
     }
 
-    setIsSubmitting(true);
-    setSubmitStatus('idle');
-
     try {
+      setIsSubmitting(true);
+      console.log('Sending form data:', formData);
+
       const response = await fetch('https://my-portfolio-yb.onrender.com/api/contact', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
+          'Content-Type': 'application/json'
         },
-        mode: 'cors',
-        body: JSON.stringify(formData),
+        body: JSON.stringify(formData)
       });
 
+      console.log('Response status:', response.status);
+      const data = await response.json();
+      console.log('Response data:', data);
+
       if (!response.ok) {
-        const errorData = await response.json().catch(() => ({ message: 'Network error occurred' }));
-        console.error('Server error:', errorData);
-        throw new Error(errorData.message || `Server error: ${response.status}`);
+        throw new Error(data.message || 'Failed to send message');
       }
 
-      const data = await response.json().catch(() => ({ message: 'Invalid JSON response' }));
-      console.log('Success response:', data);
       setSubmitStatus('success');
       setFormData({ name: '', email: '', message: '' });
     } catch (error) {
-      console.error('Error details:', error);
+      console.error('Error in form submission:', error);
       setSubmitStatus('error');
     } finally {
       setIsSubmitting(false);
