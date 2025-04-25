@@ -6,65 +6,47 @@ require('dotenv').config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Enable CORS for all routes
-app.use(cors());
-
-// Additional CORS headers for specific routes
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'Content-Type, Accept, Origin');
-  if (req.method === 'OPTIONS') {
-    return res.sendStatus(200);
-  }
-  next();
-});
-
+// Middleware for parsing JSON and enabling CORS
 app.use(express.json());
+app.use(cors({
+  origin: '*',
+  methods: ['GET', 'POST', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Accept', 'Origin'],
+  optionsSuccessStatus: 200
+}));
 
-// Basic route for testing
-app.get('/', (req, res) => {
-  res.json({ message: 'Backend server is running' });
-});
-
-// Email transporter configuration
+// Email configuration
 const transporter = nodemailer.createTransport({
-  host: 'smtp.gmail.com',
-  port: 465,
-  secure: true, // use SSL
+  service: 'gmail',
   auth: {
     user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS // App Password from Gmail
-  },
-  tls: {
-    rejectUnauthorized: false // Accept self-signed certificates
+    pass: process.env.EMAIL_PASS
   }
 });
 
-// Test email configuration
-transporter.verify((error, success) => {
-  if (error) {
-    console.error('Email configuration error:', error);
-  } else {
-    console.log('Email server is ready to send messages');
-  }
+// Health check endpoint
+app.get('/', (req, res) => {
+  res.json({ status: 'Backend is running' });
 });
 
 // Contact form endpoint
 app.post('/api/contact', async (req, res) => {
   console.log('Received contact form submission:', req.body);
+  
   const { name, email, message } = req.body;
 
+  // Validate input
   if (!name || !email || !message) {
-    return res.status(400).json({ 
-      message: 'Missing required fields',
-      received: { name, email, message }
+    console.log('Missing required fields:', { name, email, message });
+    return res.status(400).json({
+      success: false,
+      message: 'All fields are required'
     });
   }
 
   try {
-    // Send email to your address
-    const adminMail = await transporter.sendMail({
+    // Send email to admin
+    await transporter.sendMail({
       from: process.env.EMAIL_USER,
       to: process.env.EMAIL_USER,
       subject: `Portfolio Contact: ${name}`,
@@ -77,8 +59,8 @@ app.post('/api/contact', async (req, res) => {
       `
     });
 
-    // Send confirmation to sender
-    const userMail = await transporter.sendMail({
+    // Send confirmation to user
+    await transporter.sendMail({
       from: process.env.EMAIL_USER,
       to: email,
       subject: 'Thank you for your message',
@@ -90,30 +72,36 @@ app.post('/api/contact', async (req, res) => {
       `
     });
 
-    console.log('Emails sent successfully:', {
-      adminMailId: adminMail.messageId,
-      userMailId: userMail.messageId
-    });
-
-    res.status(200).json({ 
-      message: 'Message sent successfully',
-      messageIds: {
-        admin: adminMail.messageId,
-        user: userMail.messageId
-      }
+    console.log('Emails sent successfully');
+    res.status(200).json({
+      success: true,
+      message: 'Message sent successfully'
     });
   } catch (error) {
     console.error('Error sending email:', error);
-    res.status(500).json({ 
+    res.status(500).json({
+      success: false,
       message: 'Failed to send message',
       error: error.message
     });
   }
 });
 
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error('Global error handler:', err);
+  res.status(500).json({
+    success: false,
+    message: 'Internal server error',
+    error: err.message
+  });
+});
+
+// Start server
 app.listen(PORT, () => {
   console.log(`Backend server is running on port ${PORT}`);
   console.log('Email configuration:', {
-    user: process.env.EMAIL_USER
+    user: process.env.EMAIL_USER,
+    configured: !!process.env.EMAIL_USER && !!process.env.EMAIL_PASS
   });
 }); 

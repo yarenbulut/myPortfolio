@@ -69,28 +69,36 @@ const Contact = () => {
 
     try {
       setIsSubmitting(true);
-      console.log('Sending form data:', formData);
+      console.log('Attempting to send message...');
 
-      const response = await fetch('https://my-portfolio-yb.onrender.com/api/contact', {
+      const API_URL = import.meta.env.VITE_API_URL || 'https://my-portfolio-yb.onrender.com';
+      const response = await fetch(`${API_URL}/api/contact`, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify(formData)
       });
 
-      console.log('Response status:', response.status);
-      const data = await response.json();
-      console.log('Response data:', data);
+      console.log('Response received:', response.status);
+      let data;
+      
+      try {
+        data = await response.json();
+        console.log('Response data:', data);
+      } catch (jsonError) {
+        console.error('Error parsing response:', jsonError);
+        throw new Error('Invalid server response');
+      }
 
       if (!response.ok) {
-        throw new Error(data.message || 'Failed to send message');
+        throw new Error(data.message || `Server error: ${response.status}`);
       }
 
       setSubmitStatus('success');
       setFormData({ name: '', email: '', message: '' });
-    } catch (error) {
-      console.error('Error in form submission:', error);
+    } catch (error: any) {
+      console.error('Form submission error:', error);
       setSubmitStatus('error');
     } finally {
       setIsSubmitting(false);
