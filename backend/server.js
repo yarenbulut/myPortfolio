@@ -4,6 +4,7 @@ const nodemailer = require('nodemailer');
 require('dotenv').config();
 
 const app = express();
+const PORT = process.env.PORT || 3000;
 
 // CORS configuration
 app.use(cors({
@@ -16,10 +17,15 @@ app.use(express.json());
 
 // Email transporter configuration
 const transporter = nodemailer.createTransport({
-  service: 'gmail',
+  host: 'smtp.gmail.com',
+  port: 465,
+  secure: true, // use SSL
   auth: {
     user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS
+    pass: process.env.EMAIL_PASS // App Password from Gmail
+  },
+  tls: {
+    rejectUnauthorized: false // Accept self-signed certificates
   }
 });
 
@@ -48,7 +54,7 @@ app.post('/api/contact', async (req, res) => {
     // Send email to your address
     const adminMail = await transporter.sendMail({
       from: process.env.EMAIL_USER,
-      to: process.env.CONTACT_EMAIL,
+      to: process.env.EMAIL_USER,
       subject: `Portfolio Contact: ${name}`,
       html: `
         <h3>New Contact Form Message</h3>
@@ -93,12 +99,9 @@ app.post('/api/contact', async (req, res) => {
   }
 });
 
-const PORT = process.env.PORT || 3000;
-
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+  console.log(`Backend server is running on port ${PORT}`);
   console.log('Email configuration:', {
-    user: process.env.EMAIL_USER,
-    contactEmail: process.env.CONTACT_EMAIL
+    user: process.env.EMAIL_USER
   });
 }); 
