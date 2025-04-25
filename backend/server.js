@@ -14,7 +14,8 @@ const corsOptions = {
     'http://localhost:3002',
     'https://yarenbulut.com',
     'https://www.yarenbulut.com',
-    'https://my-portfolio-yb.vercel.app'
+    'https://my-portfolio-yb.vercel.app',
+    'https://my-portfolio-yb.onrender.com'
   ],
   methods: ['POST', 'GET', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Accept'],
