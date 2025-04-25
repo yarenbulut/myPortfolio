@@ -75,7 +75,10 @@ const Contact = () => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Origin': 'https://yarenbulut.com'
         },
+        credentials: 'include',
         body: JSON.stringify(formData),
       });
 
