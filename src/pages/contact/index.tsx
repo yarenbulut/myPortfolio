@@ -71,23 +71,27 @@ const Contact = () => {
       setIsSubmitting(true);
       console.log('Attempting to send message...');
 
-      const API_URL = import.meta.env.VITE_API_URL || 'https://my-portfolio-yb.onrender.com';
-      const response = await fetch(`${API_URL}/api/contact`, {
+      // Use direct URL in production
+      const response = await fetch('https://my-portfolio-yb.onrender.com/api/contact', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Accept': 'application/json'
         },
+        mode: 'cors',
         body: JSON.stringify(formData)
       });
 
       console.log('Response received:', response.status);
-      let data;
       
+      // Handle non-JSON responses
+      const text = await response.text();
+      let data;
       try {
-        data = await response.json();
+        data = JSON.parse(text);
         console.log('Response data:', data);
       } catch (jsonError) {
-        console.error('Error parsing response:', jsonError);
+        console.error('Error parsing response:', text);
         throw new Error('Invalid server response');
       }
 
@@ -97,6 +101,7 @@ const Contact = () => {
 
       setSubmitStatus('success');
       setFormData({ name: '', email: '', message: '' });
+      
     } catch (error: any) {
       console.error('Form submission error:', error);
       setSubmitStatus('error');
