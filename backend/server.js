@@ -12,13 +12,24 @@ app.use(cors({
     'http://localhost:3001',
     'http://192.168.1.162:3001',
     'https://yarenbulut.com',
-    'https://www.yarenbulut.com'
+    'https://www.yarenbulut.com',
+    'https://my-portfolio-yb.vercel.app'
   ],
-  methods: ['POST'],
-  credentials: true
+  methods: ['GET', 'POST', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Accept', 'Origin', 'Authorization'],
+  credentials: true,
+  optionsSuccessStatus: 200
 }));
 
+// Pre-flight requests
+app.options('*', cors());
+
 app.use(express.json());
+
+// Basic route for testing
+app.get('/', (req, res) => {
+  res.json({ message: 'Backend server is running' });
+});
 
 // Email transporter configuration
 const transporter = nodemailer.createTransport({

@@ -75,23 +75,24 @@ const Contact = () => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Accept': 'application/json',
-          'Origin': 'https://yarenbulut.com'
+          'Accept': 'application/json'
         },
-        credentials: 'include',
+        mode: 'cors',
         body: JSON.stringify(formData),
       });
 
       if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || 'Failed to send message');
+        const errorData = await response.json().catch(() => ({ message: 'Network error occurred' }));
+        console.error('Server error:', errorData);
+        throw new Error(errorData.message || `Server error: ${response.status}`);
       }
 
-      const data = await response.json();
+      const data = await response.json().catch(() => ({ message: 'Invalid JSON response' }));
+      console.log('Success response:', data);
       setSubmitStatus('success');
       setFormData({ name: '', email: '', message: '' });
     } catch (error) {
-      console.error('Error sending message:', error);
+      console.error('Error details:', error);
       setSubmitStatus('error');
     } finally {
       setIsSubmitting(false);
