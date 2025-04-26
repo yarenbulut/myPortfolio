@@ -27,7 +27,7 @@ app.use(cors({
     'https://yarenbulut.com',
     'https://www.yarenbulut.com',
     'http://localhost:3001',
-    'https://my-portfolio-yb.onrender.com'
+    'https://myportfolio-c2sp.onrender.com'
   ],
   methods: ['POST', 'OPTIONS'],
   credentials: true,
