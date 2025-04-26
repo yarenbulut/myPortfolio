@@ -115,43 +115,45 @@ const Navbar = ({ darkMode, setDarkMode }: NavbarProps) => {
 
       {/* Mobile menu */}
       {isOpen && (
-        <div className="md:hidden bg-gray-900/95 backdrop-blur-md">
-          <div className="px-2 pt-2 pb-3 space-y-1">
-            <Link
-              to="/"
-              className="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700/50 transition-colors"
-              onClick={() => setIsOpen(false)}
-            >
-              Home
-            </Link>
-            <Link
-              to="/about"
-              className="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700/50 transition-colors"
-              onClick={() => setIsOpen(false)}
-            >
-              About
-            </Link>
-            <Link
-              to="/projects"
-              className="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700/50 transition-colors"
-              onClick={() => setIsOpen(false)}
-            >
-              Projects
-            </Link>
-            <Link
-              to="/skills"
-              className="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700/50 transition-colors"
-              onClick={() => setIsOpen(false)}
-            >
-              Skills
-            </Link>
-            <Link
-              to="/contact"
-              className="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700/50 transition-colors"
-              onClick={() => setIsOpen(false)}
-            >
-              Contact
-            </Link>
+        <div className="md:hidden fixed inset-0 bg-gray-900/95 backdrop-blur-md z-40">
+          <div className="flex flex-col items-center justify-center h-full">
+            <div className="w-full max-w-sm space-y-4 p-4">
+              <Link
+                to="/"
+                className="block w-full text-center px-4 py-3 rounded-lg text-lg font-medium text-gray-300 hover:text-white hover:bg-gray-700/50 transition-colors"
+                onClick={() => setIsOpen(false)}
+              >
+                Home
+              </Link>
+              <Link
+                to="/about"
+                className="block w-full text-center px-4 py-3 rounded-lg text-lg font-medium text-gray-300 hover:text-white hover:bg-gray-700/50 transition-colors"
+                onClick={() => setIsOpen(false)}
+              >
+                About
+              </Link>
+              <Link
+                to="/projects"
+                className="block w-full text-center px-4 py-3 rounded-lg text-lg font-medium text-gray-300 hover:text-white hover:bg-gray-700/50 transition-colors"
+                onClick={() => setIsOpen(false)}
+              >
+                Projects
+              </Link>
+              <Link
+                to="/skills"
+                className="block w-full text-center px-4 py-3 rounded-lg text-lg font-medium text-gray-300 hover:text-white hover:bg-gray-700/50 transition-colors"
+                onClick={() => setIsOpen(false)}
+              >
+                Skills
+              </Link>
+              <Link
+                to="/contact"
+                className="block w-full text-center px-4 py-3 rounded-lg text-lg font-medium text-gray-300 hover:text-white hover:bg-gray-700/50 transition-colors"
+                onClick={() => setIsOpen(false)}
+              >
+                Contact
+              </Link>
+            </div>
           </div>
         </div>
       )}
