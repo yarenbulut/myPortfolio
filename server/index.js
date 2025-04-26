@@ -2,35 +2,75 @@ import express from 'express';
 import cors from 'cors';
 import nodemailer from 'nodemailer';
 import dotenv from 'dotenv';
+import rateLimit from 'express-rate-limit';
+import helmet from 'helmet';
+import { body, validationResult } from 'express-validator';
 
 dotenv.config();
 
 const app = express();
 
+// Security middleware
+app.use(helmet());
+
+// Rate limiting
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 5 // limit each IP to 5 requests per windowMs
+});
+
+app.use('/api/contact', limiter);
+
 // CORS configuration for production
 app.use(cors({
-  origin: ['https://yarenbulut.com', 'http://localhost:3001'],
-  methods: ['POST'],
-  credentials: true
+  origin: [
+    'https://yarenbulut.com',
+    'https://www.yarenbulut.com',
+    'http://localhost:3001',
+    'https://my-portfolio-yb.onrender.com'
+  ],
+  methods: ['POST', 'OPTIONS'],
+  credentials: true,
+  allowedHeaders: ['Content-Type']
 }));
 
-app.use(express.json());
+app.use(express.json({ limit: '10kb' }));
+
+// Input validation middleware
+const validateContact = [
+  body('name')
+    .trim()
+    .notEmpty().withMessage('Name is required')
+    .isLength({ min: 2, max: 50 }).withMessage('Name must be between 2 and 50 characters'),
+  body('email')
+    .trim()
+    .notEmpty().withMessage('Email is required')
+    .isEmail().withMessage('Invalid email format')
+    .normalizeEmail(),
+  body('message')
+    .trim()
+    .notEmpty().withMessage('Message is required')
+    .isLength({ min: 10, max: 1000 }).withMessage('Message must be between 10 and 1000 characters')
+];
 
 // Health check endpoint
 app.get('/', (req, res) => {
   res.json({ status: 'Server is running' });
 });
 
-app.post('/api/contact', async (req, res) => {
-  console.log('Received request:', req.body);
-
-  const { name, email, message } = req.body;
-
-  if (!name || !email || !message) {
-    return res.status(400).json({ message: 'Missing required fields' });
-  }
-
+app.post('/api/contact', validateContact, async (req, res) => {
   try {
+    // Check for validation errors
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ 
+        success: false,
+        errors: errors.array()
+      });
+    }
+
+    const { name, email, message } = req.body;
+
     const transporter = nodemailer.createTransport({
       host: 'smtp.gmail.com',
       port: 587,
@@ -41,10 +81,14 @@ app.post('/api/contact', async (req, res) => {
       }
     });
 
-    await transporter.verify();
+    // Verify SMTP connection configuration
+    await transporter.verify().catch((error) => {
+      console.error('SMTP Verification Error:', error);
+      throw new Error('Failed to configure email service');
+    });
 
     const mailOptions = {
-      from: process.env.EMAIL_USER,
+      from: `"Portfolio Contact Form" <${process.env.EMAIL_USER}>`,
       to: process.env.EMAIL_USER,
       subject: `Portfolio Contact: ${name}`,
       text: `
@@ -53,30 +97,37 @@ Email: ${email}
 Message: ${message}
       `,
       html: `
-<h3>New Contact Form Message</h3>
-<p><strong>Name:</strong> ${name}</p>
-<p><strong>Email:</strong> ${email}</p>
-<p><strong>Message:</strong> ${message}</p>
+<div style="font-family: Arial, sans-serif; padding: 20px;">
+  <h2>New Contact Form Message</h2>
+  <p><strong>Name:</strong> ${name}</p>
+  <p><strong>Email:</strong> ${email}</p>
+  <p><strong>Message:</strong></p>
+  <p style="white-space: pre-wrap;">${message}</p>
+  <p style="color: #666; font-size: 12px;">This message was sent from your portfolio contact form.</p>
+</div>
       `
     };
 
     const info = await transporter.sendMail(mailOptions);
-    console.log('Email sent:', info.messageId);
+    console.log('Email sent successfully:', info.messageId);
 
     res.status(200).json({ 
+      success: true,
       message: 'Message sent successfully!',
       messageId: info.messageId
     });
   } catch (error) {
-    console.error('Error:', {
+    console.error('Error in contact endpoint:', {
       name: error.name,
       message: error.message,
-      code: error.code
+      code: error.code,
+      stack: process.env.NODE_ENV === 'development' ? error.stack : undefined
     });
 
     res.status(500).json({ 
-      message: 'Failed to send message',
-      error: error.message
+      success: false,
+      message: 'Failed to send message. Please try again later.',
+      error: process.env.NODE_ENV === 'development' ? error.message : 'Internal server error'
     });
   }
 });
