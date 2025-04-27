@@ -74,21 +74,33 @@ app.post('/api/contact', validateContact, async (req, res) => {
 
     const { name, email, message } = req.body;
 
+    // Log the attempt
+    console.log('Attempting to send email with data:', { name, email });
+
     const transporter = nodemailer.createTransport({
+      service: 'gmail',
       host: 'smtp.gmail.com',
       port: 587,
       secure: false,
       auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS
-      }
+      },
+      debug: true // Enable debug logs
     });
 
     // Verify SMTP connection configuration
-    await transporter.verify().catch((error) => {
-      console.error('SMTP Verification Error:', error);
-      throw new Error('Failed to configure email service');
-    });
+    try {
+      await transporter.verify();
+      console.log('SMTP connection verified successfully');
+    } catch (verifyError) {
+      console.error('SMTP Verification Error:', verifyError);
+      return res.status(500).json({
+        success: false,
+        message: 'Email service configuration error',
+        error: process.env.NODE_ENV === 'development' ? verifyError.message : undefined
+      });
+    }
 
     const mailOptions = {
       from: `"Portfolio Contact Form" <${process.env.EMAIL_USER}>`,
@@ -106,10 +118,11 @@ Message: ${message}
   <p><strong>Email:</strong> ${email}</p>
   <p><strong>Message:</strong></p>
   <p style="white-space: pre-wrap;">${message}</p>
-  <p style="color: #666; font-size: 12px;">This message was sent from your portfolio contact form.</p>
 </div>
       `
     };
+
+    console.log('Attempting to send email with options:', mailOptions);
 
     const info = await transporter.sendMail(mailOptions);
     console.log('Email sent successfully:', info.messageId);
@@ -127,9 +140,10 @@ Message: ${message}
       stack: process.env.NODE_ENV === 'development' ? error.stack : undefined
     });
 
+    // Send a more specific error message
     res.status(500).json({ 
       success: false,
-      message: 'Failed to send message. Please try again later.',
+      message: 'Failed to send message. Email service error.',
       error: process.env.NODE_ENV === 'development' ? error.message : 'Internal server error'
     });
   }
