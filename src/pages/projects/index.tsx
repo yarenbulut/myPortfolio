@@ -6,29 +6,6 @@ import './Projects.css';
 const Projects = () => {
   const projects = [
     {
-      title: "✈️ Travel Site",
-      description: "A fully responsive, multi-page travel landing website showcasing dream destinations, luxury hotels and travel tips. Features include a hero carousel, coupon-based travel ideas, scenic beach destinations, luxury hotel cards, and a contact form.",
-      features: [
-        "Hero carousel with global travel teasers",
-        "Coupon-based travel idea exploration with imagery",
-        "Card grid of scenic beach destinations",
-        "Luxury hotel cards with Book Now CTA",
-        "Bootstrap contact form with validation",
-        "Sticky navbar with off-canvas mobile menu",
-        "Page-specific hero sections with full-bleed backgrounds"
-      ],
-      technologies: [
-        "HTML5",
-        "Bootstrap 5.3",
-        "CSS3",
-        "Font Awesome 6",
-        "Responsive Design"
-      ],
-      type: "Frontend Development",
-      github: "https://github.com/yarenbulut/travel-web-project",
-      status: "Completed"
-    },
-    {
       title: "🚄 FastTrain System",
       description: "A full-featured web application for booking high-speed train tickets. Built with React + TypeScript + TailwindCSS frontend and Spring Boot (Java) + MySQL backend. This project simulates a real-life ticket booking system with role-based access control.",
       features: [
@@ -50,6 +27,29 @@ const Projects = () => {
       ],
       type: "Full Stack Web Application",
       github: "https://github.com/yarenbulut/fastTrain-sytem",
+      status: "Completed"
+    },
+    {
+      title: "✈️ Travel Site",
+      description: "A fully responsive, multi-page travel landing website showcasing dream destinations, luxury hotels and travel tips. Features include a hero carousel, coupon-based travel ideas, scenic beach destinations, luxury hotel cards, and a contact form.",
+      features: [
+        "Hero carousel with global travel teasers",
+        "Coupon-based travel idea exploration with imagery",
+        "Card grid of scenic beach destinations",
+        "Luxury hotel cards with Book Now CTA",
+        "Bootstrap contact form with validation",
+        "Sticky navbar with off-canvas mobile menu",
+        "Page-specific hero sections with full-bleed backgrounds"
+      ],
+      technologies: [
+        "HTML5",
+        "Bootstrap 5.3",
+        "CSS3",
+        "Font Awesome 6",
+        "Responsive Design"
+      ],
+      type: "Frontend Development",
+      github: "https://github.com/yarenbulut/travel-web-project",
       status: "Completed"
     },
     {
