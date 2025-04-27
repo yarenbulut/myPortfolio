@@ -27,12 +27,18 @@ app.use(cors({
     'https://yarenbulut.com',
     'https://www.yarenbulut.com',
     'http://localhost:3001',
-    'https://myportfolio-c2sp.onrender.com'
+    'https://myportfolio-c2sp.onrender.com',
+    'http://localhost:5173'
   ],
-  methods: ['POST', 'OPTIONS'],
+  methods: ['GET', 'POST', 'OPTIONS', 'PUT', 'PATCH', 'DELETE'],
   credentials: true,
-  allowedHeaders: ['Content-Type']
+  allowedHeaders: ['Content-Type', 'Accept', 'Origin', 'Authorization', 'X-Requested-With'],
+  exposedHeaders: ['Content-Range', 'X-Content-Range'],
+  maxAge: 86400 // 24 hours
 }));
+
+// Enable pre-flight requests for all routes
+app.options('*', cors());
 
 app.use(express.json({ limit: '10kb' }));
 

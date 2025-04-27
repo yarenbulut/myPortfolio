@@ -76,10 +76,11 @@ const Contact = () => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Accept': 'application/json'
+          'Accept': 'application/json',
+          'Origin': 'https://www.yarenbulut.com'
         },
         mode: 'cors',
-        credentials: 'same-origin',
+        credentials: 'include',
         body: JSON.stringify(formData)
       });
 
