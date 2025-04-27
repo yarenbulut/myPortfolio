@@ -74,8 +74,7 @@ const Contact = () => {
       const response = await fetch('https://myportfolio-c2sp.onrender.com/api/contact', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
+          'Content-Type': 'application/json'
         },
         mode: 'cors',
         body: JSON.stringify(formData)

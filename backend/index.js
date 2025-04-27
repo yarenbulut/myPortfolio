@@ -12,15 +12,18 @@ const app = express();
 const port = process.env.PORT || 3001;
 
 // CORS configuration
-const corsOptions = {
+app.use(cors({
   origin: ['https://www.yarenbulut.com', 'https://yarenbulut.com', 'http://localhost:3000'],
-  methods: ['POST', 'GET', 'OPTIONS'],
+  methods: ['GET', 'POST', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Accept', 'Origin'],
-  credentials: true,
-  maxAge: 86400 // 24 hours
-};
+  credentials: false,
+  preflightContinue: false,
+  optionsSuccessStatus: 204
+}));
 
-app.use(cors(corsOptions));
+// Enable pre-flight requests for all routes
+app.options('*', cors());
+
 app.use(express.json());
 app.use(helmet());
 
