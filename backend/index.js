@@ -9,12 +9,18 @@ const app = express();
 const port = process.env.PORT || 3001;
 
 // CORS configuration
-app.use(cors({
-  origin: ['https://www.yarenbulut.com', 'https://yarenbulut.com', 'http://localhost:3000'],
+const corsOptions = {
+  origin: ['https://yarenbulut.com', 'https://www.yarenbulut.com', 'http://localhost:3000'],
   methods: ['GET', 'POST', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Accept', 'Origin'],
-  credentials: false
-}));
+  optionsSuccessStatus: 200
+};
+
+// Enable CORS for all routes
+app.use(cors(corsOptions));
+
+// Enable pre-flight requests
+app.options('*', cors(corsOptions));
 
 app.use(express.json());
 
@@ -30,6 +36,11 @@ app.get('/api/contact', (req, res) => {
 
 // Contact endpoint
 app.post('/api/contact', async (req, res) => {
+  // Set CORS headers explicitly for this route
+  res.header('Access-Control-Allow-Origin', 'https://www.yarenbulut.com');
+  res.header('Access-Control-Allow-Methods', 'POST');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Accept, Origin');
+
   try {
     const { name, email, message } = req.body;
     
