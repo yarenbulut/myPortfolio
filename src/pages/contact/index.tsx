@@ -72,7 +72,7 @@ const Contact = () => {
       console.log('Attempting to send message...');
 
       // Use direct URL in production
-      const response = await fetch('https://my-portfolio-yb.onrender.com/api/contact', {
+      const response = await fetch('https://myportfolio-c2sp.onrender.com/api/contact', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
