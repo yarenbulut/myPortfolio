@@ -74,19 +74,40 @@ app.post('/api/contact', validateContact, async (req, res) => {
 
     const { name, email, message } = req.body;
 
-    // Log the attempt
-    console.log('Attempting to send email with data:', { name, email });
+    // Log the attempt and environment check
+    console.log('Environment variables check:', {
+      hasEmailUser: !!process.env.EMAIL_USER,
+      hasEmailPass: !!process.env.EMAIL_PASS,
+      emailUserLength: process.env.EMAIL_USER?.length,
+      emailPassLength: process.env.EMAIL_PASS?.length
+    });
 
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       host: 'smtp.gmail.com',
       port: 587,
-      secure: false,
+      secure: false, // upgrade later with STARTTLS
+      requireTLS: true,
       auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS
       },
-      debug: true // Enable debug logs
+      logger: true,
+      debug: true,
+      tls: {
+        rejectUnauthorized: true
+      }
+    });
+
+    // Log transporter configuration
+    console.log('Transporter configuration:', {
+      host: transporter.options.host,
+      port: transporter.options.port,
+      secure: transporter.options.secure,
+      auth: {
+        user: transporter.options.auth.user,
+        hasPass: !!transporter.options.auth.pass
+      }
     });
 
     // Verify SMTP connection configuration
@@ -94,7 +115,13 @@ app.post('/api/contact', validateContact, async (req, res) => {
       await transporter.verify();
       console.log('SMTP connection verified successfully');
     } catch (verifyError) {
-      console.error('SMTP Verification Error:', verifyError);
+      console.error('SMTP Verification Error:', {
+        name: verifyError.name,
+        message: verifyError.message,
+        code: verifyError.code,
+        command: verifyError.command,
+        stack: verifyError.stack
+      });
       return res.status(500).json({
         success: false,
         message: 'Email service configuration error',
