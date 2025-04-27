@@ -60,34 +60,44 @@ app.post('/api/contact', async (req, res) => {
     console.log('Creating email transporter...');
 
     const transporter = nodemailer.createTransport({
+      service: 'gmail',
       host: 'smtp.gmail.com',
-      port: 465,
-      secure: true,
+      port: 587,
+      secure: false,
+      requireTLS: true,
       auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS
       },
-      tls: {
-        rejectUnauthorized: false
-      }
+      logger: true,
+      debug: true // include SMTP traffic in the logs
     });
 
     // Test the connection
     try {
-      console.log('Verifying SMTP connection...');
+      console.log('Verifying SMTP connection...', {
+        service: 'gmail',
+        host: 'smtp.gmail.com',
+        port: 587,
+        user: process.env.EMAIL_USER ? process.env.EMAIL_USER.substring(0, 5) + '...' : 'undefined',
+        hasPass: !!process.env.EMAIL_PASS,
+        passLength: process.env.EMAIL_PASS ? process.env.EMAIL_PASS.length : 0
+      });
       await transporter.verify();
       console.log('SMTP connection verified successfully');
     } catch (verifyError) {
       console.error('SMTP Verification Error:', {
         name: verifyError.name,
         message: verifyError.message,
-        code: verifyError.code
+        code: verifyError.code,
+        command: verifyError.command,
+        response: verifyError.response
       });
-      throw new Error('Failed to connect to email server');
+      throw new Error(`Failed to connect to email server: ${verifyError.message}`);
     }
 
-    // Prepare email
-    const mailOptions = {
+    // Prepare email for admin notification
+    const adminMailOptions = {
       from: `"Portfolio Contact" <${process.env.EMAIL_USER}>`,
       to: process.env.EMAIL_USER,
       subject: `New Contact Form Message from ${name}`,
@@ -107,16 +117,47 @@ Message: ${message}
       `
     };
 
-    // Send email with error handling
+    // Prepare auto-reply email for sender
+    const autoReplyOptions = {
+      from: `"Yaren Bulut" <${process.env.EMAIL_USER}>`,
+      to: email,
+      subject: `Thank you for your message`,
+      text: `
+Dear ${name},
+
+Thank you for contacting me. I have received your message and will get back to you as soon as possible.
+
+Best regards,
+Yaren Bulut
+      `,
+      html: `
+<div style="font-family: Arial, sans-serif; padding: 20px;">
+  <p>Dear ${name},</p>
+  <p>Thank you for contacting me. I have received your message and will get back to you as soon as possible.</p>
+  <br>
+  <p>Best regards,</p>
+  <p>Yaren Bulut</p>
+</div>
+      `
+    };
+
+    // Send emails with error handling
     try {
-      console.log('Attempting to send email...');
-      const info = await transporter.sendMail(mailOptions);
-      console.log('Email sent successfully:', info.messageId);
+      console.log('Attempting to send emails...');
+      
+      // Send notification to admin
+      const adminInfo = await transporter.sendMail(adminMailOptions);
+      console.log('Admin notification sent successfully:', adminInfo.messageId);
+      
+      // Send auto-reply to sender
+      const replyInfo = await transporter.sendMail(autoReplyOptions);
+      console.log('Auto-reply sent successfully:', replyInfo.messageId);
 
       res.status(200).json({ 
         success: true,
-        message: 'Message sent successfully!',
-        messageId: info.messageId
+        message: 'Messages sent successfully!',
+        adminMessageId: adminInfo.messageId,
+        replyMessageId: replyInfo.messageId
       });
     } catch (emailError) {
       console.error('Failed to send email:', {
