@@ -46,30 +46,32 @@ app.post('/api/contact', async (req, res) => {
     }
 
     // Create transporter with detailed logging
-    console.log('Creating email transporter with:', {
-      user: process.env.EMAIL_USER,
-      passLength: process.env.EMAIL_PASS?.length
-    });
+    console.log('Creating email transporter...');
 
     const transporter = nodemailer.createTransport({
-      service: 'gmail',
       host: 'smtp.gmail.com',
-      port: 587,
-      secure: false,
+      port: 465,
+      secure: true,
       auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS
       },
-      debug: true,
-      logger: true
+      tls: {
+        rejectUnauthorized: false
+      }
     });
 
     // Test the connection
     try {
+      console.log('Verifying SMTP connection...');
       await transporter.verify();
       console.log('SMTP connection verified successfully');
     } catch (verifyError) {
-      console.error('SMTP Verification Error:', verifyError);
+      console.error('SMTP Verification Error:', {
+        name: verifyError.name,
+        message: verifyError.message,
+        code: verifyError.code
+      });
       throw new Error('Failed to connect to email server');
     }
 
@@ -106,7 +108,11 @@ Message: ${message}
         messageId: info.messageId
       });
     } catch (emailError) {
-      console.error('Failed to send email:', emailError);
+      console.error('Failed to send email:', {
+        name: emailError.name,
+        message: emailError.message,
+        code: emailError.code
+      });
       throw new Error('Failed to send email');
     }
     
