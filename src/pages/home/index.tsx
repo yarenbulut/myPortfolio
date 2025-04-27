@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import memojiAvatar from '../../assets/memoji.PNG';
 import './style.css';
@@ -17,22 +18,22 @@ const Home = () => {
             I'm a Computer Engineer specializing in building exceptional digital experiences. Currently focused on building responsive full-stack web applications.
           </p>
           <div className="d-flex gap-4">
-            <motion.a
-              href="/projects"
-              className="hero-btn hero-btn-primary"
+            <motion.div
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              View Projects
-            </motion.a>
-            <motion.a
-              href="/contact"
-              className="hero-btn hero-btn-secondary"
+              <Link to="/projects" className="hero-btn hero-btn-primary">
+                View Projects
+              </Link>
+            </motion.div>
+            <motion.div
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              Contact Me
-            </motion.a>
+              <Link to="/contact" className="hero-btn hero-btn-secondary">
+                Contact Me
+              </Link>
+            </motion.div>
           </div>
         </div>
         <div className="col-lg-6 d-none d-lg-block text-center fade-in-up" style={{ animationDelay: '0.2s' }}>
