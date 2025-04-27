@@ -79,20 +79,23 @@ const Contact = () => {
           'Accept': 'application/json'
         },
         mode: 'cors',
+        credentials: 'same-origin',
         body: JSON.stringify(formData)
       });
 
-      console.log('Response received:', response.status);
+      console.log('Response status:', response.status);
+      console.log('Response headers:', Object.fromEntries(response.headers.entries()));
       
-      // Handle non-JSON responses
       const text = await response.text();
+      console.log('Raw response:', text);
+      
       let data;
       try {
         data = JSON.parse(text);
-        console.log('Response data:', data);
+        console.log('Parsed response data:', data);
       } catch (jsonError) {
         console.error('Error parsing response:', text);
-        throw new Error('Invalid server response');
+        throw new Error(`Invalid server response: ${text}`);
       }
 
       if (!response.ok) {
@@ -105,6 +108,10 @@ const Contact = () => {
     } catch (error: any) {
       console.error('Form submission error:', error);
       setSubmitStatus('error');
+      // Show more specific error message
+      setErrors({
+        message: error.message || 'Failed to send message. Please try again later.'
+      });
     } finally {
       setIsSubmitting(false);
     }
@@ -262,7 +269,7 @@ const Contact = () => {
 
           {submitStatus === 'error' && (
             <div className="error-message mb-4">
-              Failed to send message. Please try again later.
+              {errors.message}
             </div>
           )}
 

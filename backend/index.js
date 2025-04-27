@@ -58,6 +58,10 @@ app.get('/', (req, res) => {
   res.json({ status: 'Server is running' });
 });
 
+app.get('/api/contact', (req, res) => {
+  res.json({ message: 'Contact API endpoint is working. Please use POST method to send messages.' });
+});
+
 app.post('/api/contact', validateContact, async (req, res) => {
   try {
     // Check for validation errors
@@ -130,6 +134,24 @@ Message: ${message}
       error: process.env.NODE_ENV === 'development' ? error.message : 'Internal server error'
     });
   }
+});
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error('Global error handler:', err);
+  res.status(500).json({
+    success: false,
+    message: 'Internal server error',
+    error: process.env.NODE_ENV === 'development' ? err.message : undefined
+  });
+});
+
+// Handle 404
+app.use((req, res) => {
+  res.status(404).json({
+    success: false,
+    message: 'Route not found'
+  });
 });
 
 const PORT = process.env.PORT || 5000;
