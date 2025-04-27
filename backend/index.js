@@ -9,8 +9,19 @@ import { body, validationResult } from 'express-validator';
 dotenv.config();
 
 const app = express();
+const port = process.env.PORT || 3001;
 
-// Security middleware
+// CORS configuration
+const corsOptions = {
+  origin: ['https://www.yarenbulut.com', 'https://yarenbulut.com', 'http://localhost:3000'],
+  methods: ['POST', 'GET', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Accept', 'Origin'],
+  credentials: true,
+  maxAge: 86400 // 24 hours
+};
+
+app.use(cors(corsOptions));
+app.use(express.json());
 app.use(helmet());
 
 // Rate limiting
@@ -20,27 +31,6 @@ const limiter = rateLimit({
 });
 
 app.use('/api/contact', limiter);
-
-// CORS configuration for production
-app.use(cors({
-  origin: [
-    'https://yarenbulut.com',
-    'https://www.yarenbulut.com',
-    'http://localhost:3001',
-    'https://myportfolio-c2sp.onrender.com',
-    'http://localhost:5173'
-  ],
-  methods: ['GET', 'POST', 'OPTIONS', 'PUT', 'PATCH', 'DELETE'],
-  credentials: true,
-  allowedHeaders: ['Content-Type', 'Accept', 'Origin', 'Authorization', 'X-Requested-With'],
-  exposedHeaders: ['Content-Range', 'X-Content-Range'],
-  maxAge: 86400 // 24 hours
-}));
-
-// Enable pre-flight requests for all routes
-app.options('*', cors());
-
-app.use(express.json({ limit: '10kb' }));
 
 // Input validation middleware
 const validateContact = [
@@ -160,8 +150,7 @@ app.use((req, res) => {
   });
 });
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+app.listen(port, () => {
+  console.log(`Server running on port ${port}`);
   console.log('Environment:', process.env.NODE_ENV || 'development');
 }); 

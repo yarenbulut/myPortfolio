@@ -71,33 +71,20 @@ const Contact = () => {
       setIsSubmitting(true);
       console.log('Attempting to send message...');
 
-      // Use direct URL in production
       const response = await fetch('https://myportfolio-c2sp.onrender.com/api/contact', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Accept': 'application/json',
-          'Origin': 'https://www.yarenbulut.com'
+          'Accept': 'application/json'
         },
         mode: 'cors',
-        credentials: 'include',
         body: JSON.stringify(formData)
       });
 
       console.log('Response status:', response.status);
-      console.log('Response headers:', Object.fromEntries(response.headers.entries()));
       
-      const text = await response.text();
-      console.log('Raw response:', text);
-      
-      let data;
-      try {
-        data = JSON.parse(text);
-        console.log('Parsed response data:', data);
-      } catch (jsonError) {
-        console.error('Error parsing response:', text);
-        throw new Error(`Invalid server response: ${text}`);
-      }
+      const data = await response.json();
+      console.log('Response data:', data);
 
       if (!response.ok) {
         throw new Error(data.message || `Server error: ${response.status}`);
