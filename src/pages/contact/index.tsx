@@ -270,7 +270,16 @@ const Contact = () => {
               disabled={isSubmitting}
               className="submit-button"
             >
-              {isSubmitting ? 'Sending...' : 'Send Message'}
+              <div className="submit-button-content">
+                {isSubmitting ? (
+                  <>
+                    <div className="loading-spinner" />
+                    <span>Sending...</span>
+                  </>
+                ) : (
+                  <span>Send Message</span>
+                )}
+              </div>
             </button>
           </motion.div>
         </form>
