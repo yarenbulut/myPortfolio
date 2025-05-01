@@ -1,11 +1,8 @@
 import { motion } from 'framer-motion';
 import './style.css';
 
-type ProficiencyLevel = 'Beginner' | 'Intermediate' | 'Advanced' | 'Expert';
-
 interface Skill {
   name: string;
-  level: ProficiencyLevel;
   icon: string;
   color: string;
 }
@@ -20,53 +17,53 @@ const Skills = () => {
     {
       category: 'Frontend Development',
       items: [
-        { name: 'JavaScript', level: 'Expert', icon: 'bi bi-filetype-js', color: '#F7DF1E' },
-        { name: 'TypeScript', level: 'Advanced', icon: 'bi bi-filetype-ts', color: '#3178C6' },
-        { name: 'React', level: 'Expert', icon: 'bi bi-filetype-jsx', color: '#61DAFB' },
-        { name: 'HTML5', level: 'Expert', icon: 'bi bi-filetype-html', color: '#E34F26' },
-        { name: 'CSS3', level: 'Expert', icon: 'bi bi-filetype-css', color: '#1572B6' },
-        { name: 'Bootstrap', level: 'Expert', icon: 'bi bi-bootstrap', color: '#7952B3' },
-        { name: 'Tailwind CSS', level: 'Advanced', icon: 'bi bi-wind', color: '#38B2AC' },
+        { name: 'JavaScript', icon: 'bi bi-filetype-js', color: '#F7DF1E' },
+        { name: 'TypeScript', icon: 'bi bi-filetype-ts', color: '#3178C6' },
+        { name: 'React', icon: 'bi bi-filetype-jsx', color: '#61DAFB' },
+        { name: 'HTML5', icon: 'bi bi-filetype-html', color: '#E34F26' },
+        { name: 'CSS3', icon: 'bi bi-filetype-css', color: '#1572B6' },
+        { name: 'Bootstrap', icon: 'bi bi-bootstrap', color: '#7952B3' },
+        { name: 'Tailwind CSS', icon: 'bi bi-wind', color: '#38B2AC' },
       ],
     },
     {
       category: 'Backend Development',
       items: [
-        { name: 'Python', level: 'Advanced', icon: 'bi bi-filetype-py', color: '#3776AB' },
-        { name: 'Java', level: 'Advanced', icon: 'bi bi-filetype-java', color: '#007396' },
-        { name: 'C/C++', level: 'Intermediate', icon: 'bi bi-filetype-c', color: '#00599C' },
-        { name: 'Node.js', level: 'Advanced', icon: 'bi bi-filetype-js', color: '#339933' },
-        { name: 'Express.js', level: 'Intermediate', icon: 'bi bi-filetype-js', color: '#000000' },
-        { name: 'Spring Boot', level: 'Intermediate', icon: 'bi bi-spring', color: '#6DB33F' },
+        { name: 'Python', icon: 'bi bi-filetype-py', color: '#3776AB' },
+        { name: 'Java', icon: 'bi bi-filetype-java', color: '#007396' },
+        { name: 'C/C++', icon: 'bi bi-filetype-c', color: '#00599C' },
+        { name: 'Node.js', icon: 'bi bi-filetype-js', color: '#339933' },
+        { name: 'Express.js', icon: 'bi bi-filetype-js', color: '#000000' },
+        { name: 'Spring Boot', icon: 'bi bi-spring', color: '#6DB33F' },
       ],
     },
     {
       category: 'Database & ORM',
       items: [
-        { name: 'SQL', level: 'Advanced', icon: 'bi bi-database', color: '#4479A1' },
-        { name: 'MongoDB', level: 'Advanced', icon: 'bi bi-database', color: '#47A248' },
-        { name: 'PostgreSQL', level: 'Intermediate', icon: 'bi bi-database', color: '#336791' },
-        { name: 'Prisma', level: 'Intermediate', icon: 'bi bi-database', color: '#2D3748' },
-        { name: 'Mongoose', level: 'Intermediate', icon: 'bi bi-database', color: '#880000' },
+        { name: 'SQL', icon: 'bi bi-database', color: '#4479A1' },
+        { name: 'MongoDB', icon: 'bi bi-database', color: '#47A248' },
+        { name: 'PostgreSQL', icon: 'bi bi-database', color: '#336791' },
+        { name: 'Prisma', icon: 'bi bi-database', color: '#2D3748' },
+        { name: 'Mongoose', icon: 'bi bi-database', color: '#880000' },
       ],
     },
     {
       category: 'Cloud & DevOps',
       items: [
-        { name: 'AWS', level: 'Intermediate', icon: 'bi bi-cloud', color: '#FF9900' },
-        { name: 'EC2', level: 'Intermediate', icon: 'bi bi-hdd-network', color: '#FF9900' },
-        { name: 'S3', level: 'Intermediate', icon: 'bi bi-hdd-stack', color: '#FF9900' },
-        { name: 'Docker', level: 'Intermediate', icon: 'bi bi-box', color: '#2496ED' },
-        { name: 'Git', level: 'Advanced', icon: 'bi bi-git', color: '#F05032' },
-        { name: 'CI/CD', level: 'Intermediate', icon: 'bi bi-arrow-repeat', color: '#2088FF' },
+        { name: 'AWS', icon: 'bi bi-cloud', color: '#FF9900' },
+        { name: 'EC2', icon: 'bi bi-hdd-network', color: '#FF9900' },
+        { name: 'S3', icon: 'bi bi-hdd-stack', color: '#FF9900' },
+        { name: 'Docker', icon: 'bi bi-box', color: '#2496ED' },
+        { name: 'Git', icon: 'bi bi-git', color: '#F05032' },
+        { name: 'CI/CD', icon: 'bi bi-arrow-repeat', color: '#2088FF' },
       ],
     },
     {
       category: 'Machine Learning & AI',
       items: [
-        { name: 'PyTorch', level: 'Intermediate', icon: 'bi bi-cpu', color: '#EE4C2C' },
-        { name: 'TensorFlow', level: 'Beginner', icon: 'bi bi-cpu', color: '#FF6F00' },
-        { name: 'Scikit-learn', level: 'Intermediate', icon: 'bi bi-graph-up', color: '#F7931E' },
+        { name: 'PyTorch', icon: 'bi bi-cpu', color: '#EE4C2C' },
+        { name: 'TensorFlow', icon: 'bi bi-cpu', color: '#FF6F00' },
+        { name: 'Scikit-learn', icon: 'bi bi-graph-up', color: '#F7931E' },
       ],
     },
   ];
@@ -114,9 +111,6 @@ const Skills = () => {
                       </div>
                       <div className="skill-info">
                         <h3 className="skill-name">{skill.name}</h3>
-                        <div className="skill-level">
-                          {skill.level}
-                        </div>
                       </div>
                     </div>
                   </motion.div>
