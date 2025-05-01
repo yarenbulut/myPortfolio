@@ -114,7 +114,7 @@ const Skills = () => {
                       </div>
                       <div className="skill-info">
                         <h3 className="skill-name">{skill.name}</h3>
-                        <div className={`skill-level ${skill.level.toLowerCase()}`}>
+                        <div className="skill-level">
                           {skill.level}
                         </div>
                       </div>
