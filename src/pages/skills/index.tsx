@@ -1,58 +1,72 @@
 import { motion } from 'framer-motion';
 import './style.css';
 
+type ProficiencyLevel = 'Beginner' | 'Intermediate' | 'Advanced' | 'Expert';
+
+interface Skill {
+  name: string;
+  level: ProficiencyLevel;
+  icon: string;
+  color: string;
+}
+
+interface SkillCategory {
+  category: string;
+  items: Skill[];
+}
+
 const Skills = () => {
-  const skills = [
+  const skills: SkillCategory[] = [
     {
       category: 'Frontend Development',
       items: [
-        { name: 'JavaScript', level: 90, icon: 'bi bi-filetype-js', color: '#F7DF1E' },
-        { name: 'TypeScript', level: 85, icon: 'bi bi-filetype-ts', color: '#3178C6' },
-        { name: 'React', level: 90, icon: 'bi bi-filetype-jsx', color: '#61DAFB' },
-        { name: 'HTML5', level: 95, icon: 'bi bi-filetype-html', color: '#E34F26' },
-        { name: 'CSS3', level: 95, icon: 'bi bi-filetype-css', color: '#1572B6' },
-        { name: 'Bootstrap', level: 90, icon: 'bi bi-bootstrap', color: '#7952B3' },
-        { name: 'Tailwind CSS', level: 80, icon: 'bi bi-wind', color: '#38B2AC' },
+        { name: 'JavaScript', level: 'Expert', icon: 'bi bi-filetype-js', color: '#F7DF1E' },
+        { name: 'TypeScript', level: 'Advanced', icon: 'bi bi-filetype-ts', color: '#3178C6' },
+        { name: 'React', level: 'Expert', icon: 'bi bi-filetype-jsx', color: '#61DAFB' },
+        { name: 'HTML5', level: 'Expert', icon: 'bi bi-filetype-html', color: '#E34F26' },
+        { name: 'CSS3', level: 'Expert', icon: 'bi bi-filetype-css', color: '#1572B6' },
+        { name: 'Bootstrap', level: 'Expert', icon: 'bi bi-bootstrap', color: '#7952B3' },
+        { name: 'Tailwind CSS', level: 'Advanced', icon: 'bi bi-wind', color: '#38B2AC' },
       ],
     },
     {
       category: 'Backend Development',
       items: [
-        { name: 'Python', level: 85, icon: 'bi bi-filetype-py', color: '#3776AB' },
-        { name: 'Java', level: 80, icon: 'bi bi-filetype-java', color: '#007396' },
-        { name: 'C/C++', level: 75, icon: 'bi bi-filetype-c', color: '#00599C' },
-        { name: 'Node.js', level: 80, icon: 'bi bi-filetype-js', color: '#339933' },
-        { name: 'Express.js', level: 75, icon: 'bi bi-filetype-js', color: '#000000' },
-        { name: 'Spring Boot', level: 70, icon: 'bi bi-spring', color: '#6DB33F' },
+        { name: 'Python', level: 'Advanced', icon: 'bi bi-filetype-py', color: '#3776AB' },
+        { name: 'Java', level: 'Advanced', icon: 'bi bi-filetype-java', color: '#007396' },
+        { name: 'C/C++', level: 'Intermediate', icon: 'bi bi-filetype-c', color: '#00599C' },
+        { name: 'Node.js', level: 'Advanced', icon: 'bi bi-filetype-js', color: '#339933' },
+        { name: 'Express.js', level: 'Intermediate', icon: 'bi bi-filetype-js', color: '#000000' },
+        { name: 'Spring Boot', level: 'Intermediate', icon: 'bi bi-spring', color: '#6DB33F' },
       ],
     },
     {
       category: 'Database & ORM',
       items: [
-        { name: 'SQL', level: 85, icon: 'bi bi-database', color: '#4479A1' },
-        { name: 'MongoDB', level: 80, icon: 'bi bi-database', color: '#47A248' },
-        { name: 'PostgreSQL', level: 75, icon: 'bi bi-database', color: '#336791' },
-        { name: 'Prisma', level: 70, icon: 'bi bi-database', color: '#2D3748' },
-        { name: 'Mongoose', level: 75, icon: 'bi bi-database', color: '#880000' },
+        { name: 'SQL', level: 'Advanced', icon: 'bi bi-database', color: '#4479A1' },
+        { name: 'MongoDB', level: 'Advanced', icon: 'bi bi-database', color: '#47A248' },
+        { name: 'PostgreSQL', level: 'Intermediate', icon: 'bi bi-database', color: '#336791' },
+        { name: 'Prisma', level: 'Intermediate', icon: 'bi bi-database', color: '#2D3748' },
+        { name: 'Mongoose', level: 'Intermediate', icon: 'bi bi-database', color: '#880000' },
       ],
     },
     {
       category: 'Cloud & DevOps',
       items: [
-        { name: 'AWS', level: 75, icon: 'bi bi-cloud', color: '#FF9900' },
-        { name: 'EC2', level: 70, icon: 'bi bi-hdd-network', color: '#FF9900' },
-        { name: 'S3', level: 70, icon: 'bi bi-hdd-stack', color: '#FF9900' },
-        { name: 'Docker', level: 75, icon: 'bi bi-box', color: '#2496ED' },
-        { name: 'Git', level: 85, icon: 'bi bi-git', color: '#F05032' },
-        { name: 'CI/CD', level: 70, icon: 'bi bi-arrow-repeat', color: '#2088FF' },
+        { name: 'AWS', level: 'Intermediate', icon: 'bi bi-cloud', color: '#FF9900' },
+        { name: 'EC2', level: 'Intermediate', icon: 'bi bi-hdd-network', color: '#FF9900' },
+        { name: 'S3', level: 'Intermediate', icon: 'bi bi-hdd-stack', color: '#FF9900' },
+        { name: 'Docker', level: 'Intermediate', icon: 'bi bi-box', color: '#2496ED' },
+        { name: 'Git', level: 'Advanced', icon: 'bi bi-git', color: '#F05032' },
+        { name: 'CI/CD', level: 'Intermediate', icon: 'bi bi-arrow-repeat', color: '#2088FF' },
       ],
     },
     {
       category: 'Machine Learning & AI',
       items: [
-        { name: 'PyTorch', level: 70, icon: 'bi bi-cpu', color: '#EE4C2C' },
-        { name: 'TensorFlow', level: 65, icon: 'bi bi-cpu', color: '#FF6F00' },
-        { name: 'Scikit-learn', level: 75, icon: 'bi bi-graph-up', color: '#F7931E' },
+        { name: 'PyTorch', level: 'Intermediate', icon: 'bi bi-cpu', color: '#EE4C2C' },
+        { name: 'TensorFlow', level: 'Beginner', icon: 'bi bi-cpu', color: '#FF6F00' },
+        { name: 'Scikit-learn', level: 'Intermediate', icon: 'bi bi-graph-up', color: '#F7931E' },
       ],
     },
   ];
@@ -90,7 +104,7 @@ const Skills = () => {
                 {category.items.map((skill, skillIndex) => (
                   <motion.div
                     key={skillIndex}
-                    whileHover={{ scale: 1.02, y: -5 }}
+                    whileHover={{ scale: 1.02 }}
                     className="skill-card"
                     style={{ '--skill-color': skill.color } as React.CSSProperties}
                   >
@@ -100,16 +114,8 @@ const Skills = () => {
                       </div>
                       <div className="skill-info">
                         <h3 className="skill-name">{skill.name}</h3>
-                        <div className="skill-level">
-                          <div className="skill-level-bar">
-                            <motion.div
-                              initial={{ width: 0 }}
-                              animate={{ width: `${skill.level}%` }}
-                              transition={{ duration: 1, delay: 0.5 + skillIndex * 0.1 }}
-                              className="skill-level-progress"
-                            />
-                          </div>
-                          <span className="skill-level-text">{skill.level}%</span>
+                        <div className={`skill-level ${skill.level.toLowerCase()}`}>
+                          {skill.level}
                         </div>
                       </div>
                     </div>
