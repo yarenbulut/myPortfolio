@@ -10,18 +10,22 @@ const port = process.env.PORT || 3001;
 
 // CORS configuration
 const corsOptions = {
-  origin: ['https://yarenbulut.com', 'https://www.yarenbulut.com', 'http://localhost:3000'],
+  origin: [
+    'http://localhost:3000',
+    'https://yarenbulut.com',
+    'https://www.yarenbulut.com',
+    'https://my-portfolio-pu10dxkfu-yarenbuluts-projects.vercel.app'
+  ],
   methods: ['GET', 'POST', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Accept', 'Origin'],
+  credentials: true,
   optionsSuccessStatus: 200
 };
 
-// Enable CORS for all routes
+// Apply CORS middleware
 app.use(cors(corsOptions));
 
-// Enable pre-flight requests
-app.options('*', cors(corsOptions));
-
+// Parse JSON bodies
 app.use(express.json());
 
 // Basic health check endpoint

@@ -26,6 +26,28 @@ const Contact = () => {
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
+  // Ping the server every 14 minutes to keep it alive
+  useEffect(() => {
+    const pingServer = async () => {
+      try {
+        await fetch(`${import.meta.env.VITE_API_URL}/api/contact`, {
+          method: 'GET'
+        });
+        console.log('Server pinged successfully');
+      } catch (error) {
+        console.log('Failed to ping server:', error);
+      }
+    };
+
+    // Ping immediately when component mounts
+    pingServer();
+
+    // Then ping every 14 minutes
+    const interval = setInterval(pingServer, 14 * 60 * 1000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   useEffect(() => {
     if (submitStatus === 'success') {
       setShowSuccessMessage(true);
@@ -71,14 +93,20 @@ const Contact = () => {
       setIsSubmitting(true);
       console.log('Attempting to send message...');
 
-      const response = await fetch('https://myportfolio-c2sp.onrender.com/api/contact', {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 60000);
+
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/contact`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
         mode: 'cors',
-        body: JSON.stringify(formData)
+        body: JSON.stringify(formData),
+        signal: controller.signal
       });
+
+      clearTimeout(timeoutId);
 
       console.log('Response status:', response.status);
       
@@ -95,10 +123,16 @@ const Contact = () => {
     } catch (error: any) {
       console.error('Form submission error:', error);
       setSubmitStatus('error');
-      // Show more specific error message
-      setErrors({
-        message: error.message || 'Failed to send message. Please try again later.'
-      });
+      
+      if (error.name === 'AbortError') {
+        setErrors({
+          message: 'Server is starting up, please wait a moment and try again. This might take up to 1 minute.'
+        });
+      } else {
+        setErrors({
+          message: error.message || 'Failed to send message. Please try again later.'
+        });
+      }
     } finally {
       setIsSubmitting(false);
     }
@@ -274,13 +308,18 @@ const Contact = () => {
                 {isSubmitting ? (
                   <>
                     <div className="loading-spinner" />
-                    <span>Sending...</span>
+                    <span>Sending... This might take up to a minute</span>
                   </>
                 ) : (
                   <span>Send Message</span>
                 )}
               </div>
             </button>
+            {isSubmitting && (
+              <p className="text-sm text-gray-400 mt-2 text-center">
+                Note: First submission might take longer as the server starts up
+              </p>
+            )}
           </motion.div>
         </form>
 

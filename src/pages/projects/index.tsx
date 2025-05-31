@@ -75,22 +75,22 @@ const Projects = () => {
       status: "Completed"
     },
     {
-      title: "AI-Driven JPEG Steganalysis",
-      description: "State-of-the-art deep learning pipeline for JPEG steganalysis using transfer learning and Vision Transformers.",
+      title: "AI-Driven JPEG Steganalysis Research Project",
+      description: "Deep learning-based JPEG steganalysis pipeline combining spatial and frequency domain features using SEResNet18 and DCTResNet.",
       features: [
-        "Transfer learning with ResNet-18 architecture",
-        "Class-balanced sampling and cosine annealing",
-        "Advanced data augmentation with D4 transforms",
-        "Hybrid CNN-ViT architecture for improved detection",
-        "Multi-head classification strategy"
+        "Dual-branch model: SEResNet18 + DCTResNet",
+        "Channel attention with SE blocks",
+        "CutMix + MixUp augmentations on Y-channel",
+        "Class-balanced sampling & cosine LR scheduling",
+        "Multi-head classification with late fusion"
       ],
       technologies: [
         "Python",
         "PyTorch",
-        "Vision Transformers",
         "ResNet",
-        "Deep Learning",
-        "CUDA"
+        "Vision Transformers",
+        "CUDA",
+        "Deep Learning"
       ],
       type: "Research Project",
       github: "https://github.com/yarenbulut/steganalysis",
