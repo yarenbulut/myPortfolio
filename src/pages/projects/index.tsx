@@ -75,7 +75,7 @@ const Projects = () => {
       status: "Completed"
     },
     {
-      title: "AI-Driven JPEG Steganalysis Research Project",
+      title: "🧠 AI-Driven JPEG Steganalysis Research Project",
       description: "Deep learning-based JPEG steganalysis pipeline combining spatial and frequency domain features using SEResNet18 and DCTResNet.",
       features: [
         "Dual-branch model: SEResNet18 + DCTResNet",
