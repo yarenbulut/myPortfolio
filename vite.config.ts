@@ -17,11 +17,20 @@ export default defineConfig({
   assetsInclude: ['**/*.PNG', '**/*.png', '**/*.jpg', '**/*.jpeg', '**/*.gif', '**/*.svg'],
   publicDir: 'public',
   build: {
+    outDir: 'dist',
     assetsDir: 'assets',
+    sourcemap: true,
     rollupOptions: {
       input: {
         main: 'index.html'
+      },
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom', 'react-router-dom'],
+          style: ['bootstrap', 'bootstrap-icons']
+        }
       }
-    }
+    },
+    chunkSizeWarningLimit: 1000
   }
 })
