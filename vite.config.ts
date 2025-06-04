@@ -14,7 +14,14 @@ export default defineConfig({
       '@': '/src'
     }
   },
-  assetsInclude: ['**/*.PNG', '**/*.png', '**/*.jpg', '**/*.jpeg', '**/*.gif', '**/*.svg'],
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: `@import "bootstrap/scss/bootstrap";`
+      }
+    }
+  },
+  assetsInclude: ['**/*.PNG', '**/*.png', '**/*.jpg', '**/*.jpeg', '**/*.gif', '**/*.svg', '**/*.woff', '**/*.woff2', '**/*.eot', '**/*.ttf'],
   publicDir: 'public',
   build: {
     outDir: 'dist',
@@ -27,7 +34,7 @@ export default defineConfig({
       output: {
         manualChunks: {
           vendor: ['react', 'react-dom', 'react-router-dom'],
-          style: ['bootstrap', 'bootstrap-icons']
+          style: ['bootstrap']
         }
       }
     },
