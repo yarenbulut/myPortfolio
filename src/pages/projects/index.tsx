@@ -6,6 +6,28 @@ import './Projects.css';
 const Projects = () => {
   const projects = [
     {
+      title: "🧠 AI-Driven JPEG Steganalysis",
+      description: "Deep learning-based JPEG steganalysis pipeline combining spatial and frequency domain features using SEResNet18 and DCTResNet.",
+      features: [
+        "Dual-branch model: SEResNet18 + DCTResNet",
+        "Channel attention with SE blocks",
+        "CutMix + MixUp augmentations on Y-channel",
+        "Class-balanced sampling & cosine LR scheduling",
+        "Multi-head classification with late fusion"
+      ],
+      technologies: [
+        "Python",
+        "PyTorch",
+        "Vision Transformers",
+        "ResNet",
+        "CUDA",
+        "Deep Learning"
+      ],
+      type: "Research Project",
+      github: "https://github.com/yarenbulut/steganalysis",
+      status: "Completed"
+    },
+    {
       title: "📱 DigiDiet – Smart Diet Planner",
       description: "A smart and interactive mobile application that helps users maintain a healthy lifestyle by offering personalized diet tracking and real-time nutritional guidance. DigiDiet connects users with professional dietitians and allows for flexible, local data-driven usage without requiring internet connectivity.",
       features: [
@@ -93,28 +115,6 @@ const Projects = () => {
       ],
       type: "Full Stack Desktop Application",
       github: "https://github.com/yarenbulut/cinemamanagemntsystem",
-      status: "Completed"
-    },
-    {
-      title: "🧠 AI-Driven JPEG Steganalysis",
-      description: "Deep learning-based JPEG steganalysis pipeline combining spatial and frequency domain features using SEResNet18 and DCTResNet.",
-      features: [
-        "Dual-branch model: SEResNet18 + DCTResNet",
-        "Channel attention with SE blocks",
-        "CutMix + MixUp augmentations on Y-channel",
-        "Class-balanced sampling & cosine LR scheduling",
-        "Multi-head classification with late fusion"
-      ],
-      technologies: [
-        "Python",
-        "PyTorch",
-        "Vision Transformers",
-        "ResNet",
-        "CUDA",
-        "Deep Learning"
-      ],
-      type: "Research Project",
-      github: "https://github.com/yarenbulut/steganalysis",
       status: "Completed"
     },
     {
