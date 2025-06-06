@@ -1,71 +1,28 @@
 import { motion } from 'framer-motion';
 import './style.css';
 
-interface Skill {
-  name: string;
-  icon: string;
-  color: string;
-}
-
-interface SkillCategory {
-  category: string;
-  items: Skill[];
-}
-
 const Skills = () => {
-  const skills: SkillCategory[] = [
+  const skills = [
     {
-      category: 'Frontend Development',
+      category: 'Frontend',
       items: [
-        { name: 'JavaScript', icon: 'bi bi-filetype-js', color: '#F7DF1E' },
-        { name: 'TypeScript', icon: 'bi bi-filetype-ts', color: '#3178C6' },
-        { name: 'React', icon: 'bi bi-filetype-jsx', color: '#61DAFB' },
-        { name: 'HTML5', icon: 'bi bi-filetype-html', color: '#E34F26' },
-        { name: 'CSS3', icon: 'bi bi-filetype-css', color: '#1572B6' },
-        { name: 'Bootstrap', icon: 'bi bi-bootstrap', color: '#7952B3' },
-        { name: 'Tailwind CSS', icon: 'bi bi-wind', color: '#38B2AC' },
-      ],
+        { name: 'ReactJS', icon: '/icons/react.svg', link: 'https://reactjs.org' },
+        { name: 'JavaScript', icon: '/icons/javascript.svg', link: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript' },
+        { name: 'NextJS', icon: '/icons/nextjs.svg', link: 'https://nextjs.org' },
+        { name: 'CSS', icon: '/icons/css.svg', link: 'https://developer.mozilla.org/en-US/docs/Web/CSS' },
+        { name: 'Angular', icon: '/icons/angular.svg', link: 'https://angular.io' },
+        { name: 'Bootstrap', icon: '/icons/bootstrap.svg', link: 'https://getbootstrap.com' }
+      ]
     },
     {
-      category: 'Backend Development',
+      category: 'Backend',
       items: [
-        { name: 'Python', icon: 'bi bi-filetype-py', color: '#3776AB' },
-        { name: 'Java', icon: 'bi bi-filetype-java', color: '#007396' },
-        { name: 'C/C++', icon: 'bi bi-filetype-c', color: '#00599C' },
-        { name: 'Node.js', icon: 'bi bi-filetype-js', color: '#339933' },
-        { name: 'Express.js', icon: 'bi bi-filetype-js', color: '#000000' },
-        { name: 'Spring Boot', icon: 'bi bi-spring', color: '#6DB33F' },
-      ],
-    },
-    {
-      category: 'Database & ORM',
-      items: [
-        { name: 'SQL', icon: 'bi bi-database', color: '#4479A1' },
-        { name: 'MongoDB', icon: 'bi bi-database', color: '#47A248' },
-        { name: 'PostgreSQL', icon: 'bi bi-database', color: '#336791' },
-        { name: 'Prisma', icon: 'bi bi-database', color: '#2D3748' },
-        { name: 'Mongoose', icon: 'bi bi-database', color: '#880000' },
-      ],
-    },
-    {
-      category: 'Cloud & DevOps',
-      items: [
-        { name: 'AWS', icon: 'bi bi-cloud', color: '#FF9900' },
-        { name: 'EC2', icon: 'bi bi-hdd-network', color: '#FF9900' },
-        { name: 'S3', icon: 'bi bi-hdd-stack', color: '#FF9900' },
-        { name: 'Docker', icon: 'bi bi-box', color: '#2496ED' },
-        { name: 'Git', icon: 'bi bi-git', color: '#F05032' },
-        { name: 'CI/CD', icon: 'bi bi-arrow-repeat', color: '#2088FF' },
-      ],
-    },
-    {
-      category: 'Machine Learning & AI',
-      items: [
-        { name: 'PyTorch', icon: 'bi bi-cpu', color: '#EE4C2C' },
-        { name: 'TensorFlow', icon: 'bi bi-cpu', color: '#FF6F00' },
-        { name: 'Scikit-learn', icon: 'bi bi-graph-up', color: '#F7931E' },
-      ],
-    },
+        { name: 'NodeJS', icon: '/icons/nodejs.svg', link: 'https://nodejs.org' },
+        { name: 'Rails', icon: '/icons/rails.svg', link: 'https://rubyonrails.org' },
+        { name: 'MongoDB', icon: '/icons/mongodb.svg', link: 'https://www.mongodb.com' },
+        { name: 'C++', icon: '/icons/cpp.svg', link: 'https://isocpp.org' }
+      ]
+    }
   ];
 
   return (
@@ -82,10 +39,10 @@ const Skills = () => {
           transition={{ delay: 0.2 }}
           className="text-4xl font-bold mb-12 text-center bg-gradient-to-r from-purple-400 to-pink-600 bg-clip-text text-transparent"
         >
-          Technical Skills
+          Skills
         </motion.h1>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="skills-grid">
           {skills.map((category, index) => (
             <motion.div
               key={index}
@@ -97,23 +54,23 @@ const Skills = () => {
               <h2 className="text-2xl font-semibold mb-6 text-gray-300">
                 {category.category}
               </h2>
-              <div className="grid grid-cols-1 gap-4">
+              <div className="skills-icons-grid">
                 {category.items.map((skill, skillIndex) => (
-                  <motion.div
+                  <motion.a
                     key={skillIndex}
-                    whileHover={{ scale: 1.02 }}
-                    className="skill-card"
-                    style={{ '--skill-color': skill.color } as React.CSSProperties}
+                    href={skill.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    whileHover={{ scale: 1.05 }}
+                    className="skill-item"
                   >
-                    <div className="skill-card-content">
-                      <div className="skill-icon-wrapper">
-                        <i className={`${skill.icon} skill-icon`} style={{ color: skill.color }}></i>
-                      </div>
-                      <div className="skill-info">
-                        <h3 className="skill-name">{skill.name}</h3>
-                      </div>
-                    </div>
-                  </motion.div>
+                    <img
+                      src={skill.icon}
+                      alt={skill.name}
+                      className="skill-icon"
+                    />
+                    <span className="skill-name">{skill.name}</span>
+                  </motion.a>
                 ))}
               </div>
             </motion.div>
