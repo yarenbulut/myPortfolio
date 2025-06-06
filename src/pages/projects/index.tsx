@@ -6,6 +6,27 @@ import './Projects.css';
 const Projects = () => {
   const projects = [
     {
+      title: "📱 DigiDiet – Smart Diet Planner",
+      description: "A smart and interactive mobile application that helps users maintain a healthy lifestyle by offering personalized diet tracking and real-time nutritional guidance. DigiDiet connects users with professional dietitians and allows for flexible, local data-driven usage without requiring internet connectivity.",
+      features: [
+        "Personalized Profiles with BMI and Daily Calorie Needs",
+        "Dietitian Appointment Booking with Day & Time Selection",
+        "Real-time Calorie Tracking via Selected Food Items",
+        "Nutrition Summary and Water Intake Monitoring",
+        "Fully Reactive UI with Jetpack Compose"
+      ],
+      technologies: [
+        "Kotlin",
+        "Android Jetpack Compose",
+        "Room (SQLite ORM)",
+        "ViewModel & Navigation",
+        "Material Design 3",
+        "MVVM Architecture"
+      ],
+      type: "Mobile Health Application",
+      status: "Completed"
+    },
+    {
       title: "🚄 FastTrain System",
       description: "A full-featured web application for booking high-speed train tickets. Built with React + TypeScript + TailwindCSS frontend and Spring Boot (Java) + MySQL backend. This project simulates a real-life ticket booking system with role-based access control.",
       features: [
