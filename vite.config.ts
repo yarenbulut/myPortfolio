@@ -30,12 +30,6 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: 'index.html'
-      },
-      output: {
-        manualChunks: {
-          vendor: ['react', 'react-dom', 'react-router-dom'],
-          style: ['bootstrap']
-        }
       }
     },
     chunkSizeWarningLimit: 1000
