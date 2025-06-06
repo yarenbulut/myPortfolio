@@ -92,23 +92,20 @@ const Contact = () => {
     try {
       setIsSubmitting(true);
       console.log('Attempting to send message...');
-
-      const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 60000);
+      console.log('API URL:', import.meta.env.VITE_API_URL);
 
       const response = await fetch(`${import.meta.env.VITE_API_URL}/api/contact`, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
         },
+        credentials: 'include',
         mode: 'cors',
-        body: JSON.stringify(formData),
-        signal: controller.signal
+        body: JSON.stringify(formData)
       });
 
-      clearTimeout(timeoutId);
-
-      console.log('Response status:', response.status);
+      console.log('Response:', response);
       
       const data = await response.json();
       console.log('Response data:', data);
@@ -124,15 +121,9 @@ const Contact = () => {
       console.error('Form submission error:', error);
       setSubmitStatus('error');
       
-      if (error.name === 'AbortError') {
-        setErrors({
-          message: 'Server is starting up, please wait a moment and try again. This might take up to 1 minute.'
-        });
-      } else {
-        setErrors({
-          message: error.message || 'Failed to send message. Please try again later.'
-        });
-      }
+      setErrors({
+        message: error.message || 'Failed to send message. Please try again later.'
+      });
     } finally {
       setIsSubmitting(false);
     }

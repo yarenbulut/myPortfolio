@@ -12,5 +12,22 @@
     }
   ],
   "regions": ["fra1"],
-  "alias": ["yarenbulut.com", "www.yarenbulut.com"]
+  "alias": ["yarenbulut.com", "www.yarenbulut.com"],
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    }
+  ]
 } 
