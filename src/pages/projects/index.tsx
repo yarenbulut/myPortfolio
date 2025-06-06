@@ -94,7 +94,7 @@ const Projects = () => {
       ],
       type: "Research Project",
       github: "https://github.com/yarenbulut/steganalysis",
-      status: "Ongoing"
+      status: "Completed"
     },
     {
       title: "Employee Management System",
