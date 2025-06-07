@@ -36,7 +36,6 @@ const Skills = () => {
         { name: 'JavaScript', icon: 'fab fa-js', link: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript' },
         { name: 'CSS', icon: 'fab fa-css3-alt', link: 'https://developer.mozilla.org/en-US/docs/Web/CSS' },
         { name: 'HTML5', icon: 'fab fa-html5', link: 'https://developer.mozilla.org/en-US/docs/Web/HTML' },
-        { name: 'Angular', icon: 'fab fa-angular', link: 'https://angular.io' },
         { name: 'Bootstrap', icon: 'fab fa-bootstrap', link: 'https://getbootstrap.com' }
       ]
     },
@@ -46,15 +45,16 @@ const Skills = () => {
         { name: 'Java', icon: 'fab fa-java', link: 'https://www.java.com/' },
         { name: 'Python', icon: 'fab fa-python', link: 'https://www.python.org/' },
         { name: 'Node.js', icon: 'fab fa-node-js', link: 'https://nodejs.org' },
-        { name: 'PHP', icon: 'fab fa-php', link: 'https://www.php.net/' }
+        { name: 'C++', customIcon: '/icons/cpp.svg', link: 'https://isocpp.org' },
+        { name: 'C', customIcon: '/icons/c.svg', link: 'https://en.cppreference.com/w/c' }
       ]
     },
     {
-      category: 'Mobile & Desktop',
+      category: 'Operating Systems',
       items: [
-        { name: 'Android', icon: 'fab fa-android', link: 'https://developer.android.com/' },
-        { name: 'Apple', icon: 'fab fa-apple', link: 'https://developer.apple.com/' },
-        { name: 'Windows', icon: 'fab fa-windows', link: 'https://developer.microsoft.com/' }
+        { name: 'Linux', icon: 'fab fa-linux', link: 'https://www.linux.org/' },
+        { name: 'Windows', icon: 'fab fa-windows', link: 'https://www.microsoft.com/windows' },
+        { name: 'macOS', icon: 'fab fa-apple', link: 'https://www.apple.com/macos' }
       ]
     },
     {
@@ -64,15 +64,6 @@ const Skills = () => {
         { name: 'GitHub', icon: 'fab fa-github', link: 'https://github.com/' },
         { name: 'Docker', icon: 'fab fa-docker', link: 'https://www.docker.com/' },
         { name: 'AWS', icon: 'fab fa-aws', link: 'https://aws.amazon.com/' }
-      ]
-    },
-    {
-      category: 'Programming Languages',
-      items: [
-        { name: 'Python', icon: 'fab fa-python', link: 'https://www.python.org/' },
-        { name: 'Java', icon: 'fab fa-java', link: 'https://www.java.com/' },
-        { name: 'JavaScript', icon: 'fab fa-js', link: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript' },
-        { name: 'C++', customIcon: '/icons/cpp.svg', link: 'https://isocpp.org' }
       ]
     }
   ];
@@ -94,42 +85,44 @@ const Skills = () => {
           Skills
         </motion.h1>
         
-        <div className="skills-grid">
+        <div className="row g-4">
           {skills.map((category, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 + index * 0.1 }}
-              className="skill-category"
+              className="col-md-6"
             >
-              <h2 className="h3 mb-4 text-light">
-                {category.category}
-              </h2>
-              <div className="skills-icons-grid">
-                {category.items.map((skill, skillIndex) => (
-                  <motion.a
-                    key={skillIndex}
-                    href={skill.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    whileHover={{ scale: 1.05 }}
-                    className="skill-item"
-                  >
-                    {skill.customIcon ? (
-                      <img
-                        src={skill.customIcon}
-                        alt={skill.name}
-                        className="skill-icon"
-                        width="48"
-                        height="48"
-                      />
-                    ) : (
-                      <i className={`${skill.icon} skill-icon`}></i>
-                    )}
-                    <span className="skill-name">{skill.name}</span>
-                  </motion.a>
-                ))}
+              <div className="skill-category h-100">
+                <h2 className="h3 mb-4 text-light">
+                  {category.category}
+                </h2>
+                <div className="skills-icons-grid">
+                  {category.items.map((skill, skillIndex) => (
+                    <motion.a
+                      key={skillIndex}
+                      href={skill.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      whileHover={{ scale: 1.05 }}
+                      className="skill-item"
+                    >
+                      {skill.customIcon ? (
+                        <img
+                          src={skill.customIcon}
+                          alt={skill.name}
+                          className="skill-icon"
+                          width="48"
+                          height="48"
+                        />
+                      ) : (
+                        <i className={`${skill.icon} skill-icon`}></i>
+                      )}
+                      <span className="skill-name">{skill.name}</span>
+                    </motion.a>
+                  ))}
+                </div>
               </div>
             </motion.div>
           ))}
