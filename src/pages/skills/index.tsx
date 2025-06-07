@@ -44,7 +44,9 @@ const Skills = () => {
       items: [
         { name: 'Java', icon: 'fab fa-java', link: 'https://www.java.com/' },
         { name: 'Python', icon: 'fab fa-python', link: 'https://www.python.org/' },
-        { name: 'Node.js', icon: 'fab fa-node-js', link: 'https://nodejs.org' }
+        { name: 'Node.js', icon: 'fab fa-node-js', link: 'https://nodejs.org' },
+        { name: 'C++', link: 'https://isocpp.org' },
+        { name: 'C', link: 'https://en.cppreference.com/w/c' }
       ]
     },
     {
@@ -106,7 +108,11 @@ const Skills = () => {
                       whileHover={{ scale: 1.05 }}
                       className="skill-item"
                     >
-                      <i className={`${skill.icon} skill-icon`}></i>
+                      {skill.icon ? (
+                        <i className={`${skill.icon} skill-icon`}></i>
+                      ) : (
+                        <div className="skill-icon text-light">{skill.name}</div>
+                      )}
                       <span className="skill-name">{skill.name}</span>
                     </motion.a>
                   ))}
