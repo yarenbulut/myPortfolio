@@ -50,7 +50,7 @@ const Projects = () => {
     },
     {
       title: "🚄 FastTrain System",
-      description: "A full-featured web application for booking high-speed train tickets. Built with React + TypeScript + TailwindCSS frontend and Spring Boot (Java) + MySQL backend. This project simulates a real-life ticket booking system with role-based access control.",
+      description: "A full-featured web application for booking high-speed train tickets. Built with React + TypeScript frontend and Spring Boot (Java) + MySQL backend. This project simulates a real-life ticket booking system with role-based access control.",
       features: [
         "User Module: Login, signup, password recovery, and personalized dashboard",
         "Ticket Management: Browse journeys, view prices, select seats, and make secure payments",

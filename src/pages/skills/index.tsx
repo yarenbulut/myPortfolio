@@ -83,13 +83,13 @@ const Skills = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="max-w-7xl mx-auto py-16 px-4"
+        className="container py-5"
       >
         <motion.h1
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="text-4xl font-bold mb-12 text-center bg-gradient-to-r from-purple-400 to-pink-600 bg-clip-text text-transparent"
+          className="display-4 text-center mb-5 text-gradient"
         >
           Skills
         </motion.h1>
@@ -103,7 +103,7 @@ const Skills = () => {
               transition={{ delay: 0.3 + index * 0.1 }}
               className="skill-category"
             >
-              <h2 className="text-2xl font-semibold mb-6 text-gray-300">
+              <h2 className="h3 mb-4 text-light">
                 {category.category}
               </h2>
               <div className="skills-icons-grid">
