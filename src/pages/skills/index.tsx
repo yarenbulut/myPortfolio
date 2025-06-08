@@ -42,8 +42,8 @@ const Skills = () => {
     {
       category: 'Backend',
       items: [
-        { name: 'C', icon: '/icons/c.svg', link: 'https://en.cppreference.com/w/c' },
-        { name: 'C++', icon: '/icons/cpp.svg', link: 'https://isocpp.org' },
+        { name: 'C', link: 'https://en.cppreference.com/w/c' },
+        { name: 'C++', link: 'https://isocpp.org' },
         { name: 'Java', icon: 'fab fa-java', link: 'https://www.java.com/' },
         { name: 'Python', icon: 'fab fa-python', link: 'https://www.python.org/' },
         { name: 'Node.js', icon: 'fab fa-node-js', link: 'https://nodejs.org' }
@@ -112,9 +112,7 @@ const Skills = () => {
                         <img src={skill.icon} alt={skill.name + ' icon'} className="skill-icon" style={{ marginBottom: '0.5rem' }} />
                       ) : skill.icon ? (
                         <i className={`${skill.icon} skill-icon`} style={{ marginBottom: '0.5rem' }}></i>
-                      ) : (
-                        <div className="skill-icon text-light" style={{ marginBottom: '0.5rem' }}>{skill.name}</div>
-                      )}
+                      ) : null}
                       <span className="skill-name">{skill.name}</span>
                     </motion.a>
                   ))}
