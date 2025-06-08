@@ -98,7 +98,9 @@ const Skills = () => {
                 <h2 className="h3 mb-4 text-light">
                 {category.category}
               </h2>
-                <div className="skills-icons-grid">
+                <div className="skills-icons-grid"
+                  style={category.category === 'Backend' ? { display: 'flex', gap: '2.5rem', flexWrap: 'wrap', justifyContent: 'flex-start' } : {}}
+                >
                 {category.items.map((skill, skillIndex) => (
                     <motion.a
                     key={skillIndex}
@@ -107,7 +109,7 @@ const Skills = () => {
                       rel="noopener noreferrer"
                       whileHover={{ scale: 1.05 }}
                       className="skill-item"
-                      style={category.category === 'Backend' && skill.name === 'C++' ? { marginLeft: '2.5rem' } : {}}
+                      style={{}}
                     >
                       {skill.icon && skill.icon.endsWith('.svg') ? (
                         <img src={skill.icon} alt={skill.name + ' icon'} className="skill-icon" style={{ marginBottom: '0.5rem' }} />
