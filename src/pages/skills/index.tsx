@@ -107,6 +107,7 @@ const Skills = () => {
                       rel="noopener noreferrer"
                       whileHover={{ scale: 1.05 }}
                       className="skill-item"
+                      style={category.category === 'Backend' && skill.name === 'C++' ? { marginLeft: '2.5rem' } : {}}
                     >
                       {skill.icon && skill.icon.endsWith('.svg') ? (
                         <img src={skill.icon} alt={skill.name + ' icon'} className="skill-icon" style={{ marginBottom: '0.5rem' }} />
