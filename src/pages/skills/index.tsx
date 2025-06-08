@@ -42,11 +42,11 @@ const Skills = () => {
     {
       category: 'Backend',
       items: [
+        { name: 'C', icon: '/icons/c.svg', link: 'https://en.cppreference.com/w/c' },
+        { name: 'C++', icon: '/icons/cpp.svg', link: 'https://isocpp.org' },
         { name: 'Java', icon: 'fab fa-java', link: 'https://www.java.com/' },
         { name: 'Python', icon: 'fab fa-python', link: 'https://www.python.org/' },
-        { name: 'Node.js', icon: 'fab fa-node-js', link: 'https://nodejs.org' },
-        { name: 'C++', link: 'https://isocpp.org' },
-        { name: 'C', link: 'https://en.cppreference.com/w/c' }
+        { name: 'Node.js', icon: 'fab fa-node-js', link: 'https://nodejs.org' }
       ]
     },
     {
@@ -96,27 +96,29 @@ const Skills = () => {
             >
               <div className="skill-category h-100">
                 <h2 className="h3 mb-4 text-light">
-                  {category.category}
-                </h2>
+                {category.category}
+              </h2>
                 <div className="skills-icons-grid">
-                  {category.items.map((skill, skillIndex) => (
+                {category.items.map((skill, skillIndex) => (
                     <motion.a
-                      key={skillIndex}
+                    key={skillIndex}
                       href={skill.link}
                       target="_blank"
                       rel="noopener noreferrer"
                       whileHover={{ scale: 1.05 }}
                       className="skill-item"
                     >
-                      {skill.icon ? (
-                        <i className={`${skill.icon} skill-icon`}></i>
+                      {skill.icon && skill.icon.endsWith('.svg') ? (
+                        <img src={skill.icon} alt={skill.name + ' icon'} className="skill-icon" style={{ marginBottom: '0.5rem' }} />
+                      ) : skill.icon ? (
+                        <i className={`${skill.icon} skill-icon`} style={{ marginBottom: '0.5rem' }}></i>
                       ) : (
-                        <div className="skill-icon text-light">{skill.name}</div>
+                        <div className="skill-icon text-light" style={{ marginBottom: '0.5rem' }}>{skill.name}</div>
                       )}
                       <span className="skill-name">{skill.name}</span>
                     </motion.a>
                   ))}
-                </div>
+                    </div>
               </div>
             </motion.div>
           ))}

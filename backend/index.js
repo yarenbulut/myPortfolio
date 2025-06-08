@@ -12,9 +12,11 @@ const port = process.env.PORT || 3001;
 const corsOptions = {
   origin: [
     'http://localhost:3000',
+    'http://localhost:5173',
     'https://yarenbulut.com',
     'https://www.yarenbulut.com',
-    'https://my-portfolio-pu10dxkfu-yarenbuluts-projects.vercel.app'
+    'https://my-portfolio-yb.onrender.com',
+    'https://my-portfolio-yb.vercel.app'
   ],
   methods: ['GET', 'POST', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Accept', 'Origin'],
@@ -27,6 +29,7 @@ app.use(cors(corsOptions));
 
 // Parse JSON bodies
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // Basic health check endpoint
 app.get('/', (req, res) => {

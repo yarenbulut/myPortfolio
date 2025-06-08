@@ -43,7 +43,7 @@
 .skills-icons-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-  gap: 2rem;
+  gap: 2.5rem;
   align-items: start;
   padding: 1rem 0;
 }
@@ -60,7 +60,7 @@
   border-radius: 0.75rem;
   background: rgba(255, 255, 255, 0.08);
   min-height: 120px;
-  gap: 1rem;
+  gap: 1.2rem;
 }
 
 .skill-item:hover {
@@ -77,6 +77,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: 0.7rem;
 }
 
 .skill-item:hover .skill-icon {
@@ -123,31 +124,33 @@
 
   .skills-icons-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
+    gap: 2rem;
   }
-
+  
   .skill-category {
     padding: 1.5rem;
   }
-
+  
   .skill-item {
-    padding: 1rem;
+    padding: 1.2rem;
     min-height: 100px;
+    gap: 1.1rem;
   }
-}
-
+  }
+  
 @media (max-width: 480px) {
   .skills-icons-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
+    gap: 1.3rem;
   }
-
+  
   .skill-icon {
     width: 40px;
     height: 40px;
     font-size: 2rem;
+    margin-bottom: 0.5rem;
   }
-
+  
   .skill-name {
     font-size: 0.8rem;
   }
