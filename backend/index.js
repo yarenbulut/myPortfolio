@@ -11,12 +11,9 @@ const port = process.env.PORT || 3001;
 // CORS configuration
 const corsOptions = {
   origin: [
-    'http://localhost:3000',
-    'http://localhost:5173',
     'https://yarenbulut.com',
     'https://www.yarenbulut.com',
-    'https://my-portfolio-yb.onrender.com',
-    'https://my-portfolio-yb.vercel.app'
+    'https://my-portfolio-pjy35z657-yarenbuluts-projects.vercel.app'
   ],
   methods: ['GET', 'POST', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Accept', 'Origin'],
@@ -26,6 +23,7 @@ const corsOptions = {
 
 // Apply CORS middleware
 app.use(cors(corsOptions));
+app.options('*', cors(corsOptions));
 
 // Parse JSON bodies
 app.use(express.json());
@@ -36,18 +34,13 @@ app.get('/', (req, res) => {
   res.json({ status: 'Server is running' });
 });
 
-// Simple test endpoint
+// GET /api/contact endpointi (test için)
 app.get('/api/contact', (req, res) => {
   res.json({ message: 'Contact API endpoint is working' });
 });
 
 // Contact endpoint
 app.post('/api/contact', async (req, res) => {
-  // Set CORS headers explicitly for this route
-  res.header('Access-Control-Allow-Origin', 'https://www.yarenbulut.com');
-  res.header('Access-Control-Allow-Methods', 'POST');
-  res.header('Access-Control-Allow-Headers', 'Content-Type, Accept, Origin');
-
   try {
     const { name, email, message } = req.body;
     
