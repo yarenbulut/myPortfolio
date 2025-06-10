@@ -30,7 +30,7 @@ const Contact = () => {
   useEffect(() => {
     const pingServer = async () => {
       try {
-        await fetch('https://my-portfolio-yb.onrender.com/api/contact', {
+        await fetch('https://myportfolio-c2sp.onrender.com/api/contact', {
           method: 'GET'
         });
         console.log('Server pinged successfully');
@@ -94,7 +94,7 @@ const Contact = () => {
       console.log('Attempting to send message...');
       console.log('API URL:', import.meta.env.VITE_API_URL);
 
-      const response = await fetch('https://my-portfolio-yb.onrender.com/api/contact', {
+      const response = await fetch('https://myportfolio-c2sp.onrender.com/api/contact', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
