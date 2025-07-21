@@ -13,7 +13,8 @@ const corsOptions = {
   origin: [
     'https://yarenbulut.com',
     'https://www.yarenbulut.com',
-    'https://my-portfolio-pjy35z657-yarenbuluts-projects.vercel.app'
+    'https://my-portfolio-pjy35z657-yarenbuluts-projects.vercel.app',
+    'https://myportfolio-c2sp.onrender.com' // Render backend domaini eklendi
   ],
   methods: ['GET', 'POST', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Accept', 'Origin'],
