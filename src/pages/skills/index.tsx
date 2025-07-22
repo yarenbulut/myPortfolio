@@ -36,7 +36,9 @@ const Skills = () => {
         { name: 'JavaScript', icon: 'fab fa-js', link: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript' },
         { name: 'CSS', icon: 'fab fa-css3-alt', link: 'https://developer.mozilla.org/en-US/docs/Web/CSS' },
         { name: 'HTML5', icon: 'fab fa-html5', link: 'https://developer.mozilla.org/en-US/docs/Web/HTML' },
-        { name: 'Bootstrap', icon: 'fab fa-bootstrap', link: 'https://getbootstrap.com' }
+        { name: 'Bootstrap', icon: 'fab fa-bootstrap', link: 'https://getbootstrap.com' },
+        { name: 'WordPress', icon: 'fab fa-wordpress', link: 'https://wordpress.org/' },
+        { name: 'Shopify', icon: 'fab fa-shopify', link: 'https://www.shopify.com/' }
       ]
     },
     {
