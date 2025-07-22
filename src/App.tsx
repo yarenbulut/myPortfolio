@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
 import { Container, Nav, Navbar } from 'react-bootstrap';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useState, useEffect, useRef } from 'react';
 import Home from './pages/home';
 import About from './pages/about';
 import Projects from './pages/projects';
@@ -25,16 +26,37 @@ const NavLink = ({ to, children }: { to: string; children: React.ReactNode }) =>
 };
 
 function App() {
+  const [expanded, setExpanded] = useState(false);
+  const navRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (navRef.current && !navRef.current.contains(event.target as Node)) {
+        setExpanded(false);
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [navRef]);
+
   return (
     <Router>
       <div className="app-container">
         <div className="bg-grid-pattern animate-grid" />
-        <Navbar expand="lg" fixed="top">
+        <Navbar 
+          expand="lg" 
+          fixed="top"
+          expanded={expanded}
+          onToggle={() => setExpanded(!expanded)}
+          ref={navRef}
+        >
           <Container>
-            <Navbar.Brand as={Link} to="/">Yaren Bulut</Navbar.Brand>
+            <Navbar.Brand as={Link} to="/" onClick={() => setExpanded(false)}>Yaren Bulut</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
-              <Nav className="ms-auto">
+              <Nav className="ms-auto" onSelect={() => setExpanded(false)}>
                 <NavLink to="/">Home</NavLink>
                 <NavLink to="/about">About</NavLink>
                 <NavLink to="/projects">Projects</NavLink>
