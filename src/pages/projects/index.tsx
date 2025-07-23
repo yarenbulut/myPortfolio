@@ -130,6 +130,26 @@ const Projects = () => {
       description: "Simulation of Roman political hierarchy with role management, stress testing, and penalty calculations for unfilled positions.",
       technologies: ["C++", "Simulation", "Resource Monitoring"],
       type: "System Design"
+    },
+    {
+      title: "🛒 Heytigo – Custom Shopify Theme Development",
+      description: "Built a dynamic product recommendation module and customized cart drawer logic using Shopify’s Liquid template engine. Implemented responsive design and reusable sections for Heytigo, a modern e-commerce website.",
+      features: [
+        "Dynamic product recommendation module",
+        "Custom cart drawer logic with Liquid",
+        "Reusable and modular section components",
+        "Fully responsive design for all devices",
+        "Optimized for performance and scalability"
+      ],
+      technologies: [
+        "Shopify",
+        "Liquid",
+        "SCSS",
+        "JavaScript",
+        "Custom Components"
+      ],
+      type: "E-commerce Theme Development",
+      status: "Completed"
     }
   ];
 
