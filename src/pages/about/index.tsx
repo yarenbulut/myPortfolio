@@ -14,7 +14,7 @@ const About = () => {
       location: "Istanbul, Turkey",
       description: [
         <span key="desc1" dangerouslySetInnerHTML={{
-          __html: "Actively contributed to the development and coding of responsive, mobile-friendly websites, including <a href='http://www.samaritanvillage.org/' target='_blank' rel='noopener noreferrer'>SDV Intranet</a>, <a href='https://teedo.com.tr/' target='_blank' rel='noopener noreferrer'>Teedo</a>, and Goldman Gruder & Woods, utilizing HTML, CSS, Bootstrap, and JavaScript."
+          __html: "Actively contributed to the development and coding of responsive, mobile-friendly websites, including <a href='http://www.samaritanvillage.org/' target='_blank' rel='noopener noreferrer'>SDV Intranet</a>, <a href='https://teedo.com.tr/' target='_blank' rel='noopener noreferrer'>Teedo</a>, <a href='https://heytigo.com/' target='_blank' rel='noopener noreferrer'>Heytigo</a>, and Goldman Gruder & Woods, utilizing HTML, CSS, Bootstrap, and JavaScript."
         }} />,
         "Performed comprehensive QA testing and debugging, ensuring smooth functionality and optimal user experience across multiple projects.",
         "Engaged in ongoing maintenance, development, and enhancement tasks for prominent university websites (NEIU and NPU) in the United States, employing WordPress alongside custom HTML/CSS and JavaScript integrations.",
