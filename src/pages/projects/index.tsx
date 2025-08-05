@@ -6,6 +6,50 @@ import './Projects.css';
 const Projects = () => {
   const projects = [
     {
+      title: "📈 LLM-Supported Visual Analytics",
+      description: "A no-code AI platform that enables users to perform complex data analysis using natural language commands, bridging the gap between business intelligence and advanced machine learning.",
+      features: [
+        "No-code platform for business intelligence",
+        "Natural language (NLP) to data query translation",
+        "LLM-enhanced time-aware analysis",
+        "Automated ML model execution (regression, classification)",
+        "Generative AI & XAI (Explainable AI) integration"
+      ],
+      technologies: [
+        "Python",
+        "LLM",
+        "NLP",
+        "REST API",
+        "Scikit-learn",
+        "Pandas",
+        "No-Code"
+      ],
+      type: "AI Platform Development",
+      status: "In Progress"
+    },
+    {
+      title: "🤖 Agentic AI for Automated Reporting",
+      description: "An autonomous AI agent that interprets user goals to automatically gather data from multiple sources, perform analysis, and generate insightful reports.",
+      features: [
+        "Autonomous agent based on Agentic AI principles",
+        "Goal-driven task planning and execution",
+        "Multi-source data gathering via API integration",
+        "LLM-powered data analysis and summarization",
+        "Fine-tuning open-source models for domain adaptation"
+      ],
+      technologies: [
+        "Python",
+        "LangChain",
+        "LLM",
+        "Fine-Tuning",
+        "PyTorch",
+        "API",
+        "Agentic AI"
+      ],
+      type: "Research Project",
+      status: "In Progress"
+    },
+    {
       title: "🧠 AI-Driven JPEG Steganalysis",
       description: "Deep learning-based JPEG steganalysis pipeline combining spatial and frequency domain features using SEResNet18 and DCTResNet.",
       features: [
