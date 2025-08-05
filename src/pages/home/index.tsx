@@ -12,10 +12,10 @@ const Home = () => {
           <div className="mb-4">
             <p className="mb-0 text-secondary">Hi there 👋 I'm</p>
             <h1 className="hero-title">Yaren Bulut</h1>
-            <h2 className="hero-subtitle">Full Stack Developer</h2>
+            <h2 className="hero-subtitle">Computer Engineer</h2>
           </div>
           <p className="text-secondary mb-4" style={{ fontSize: '1.1rem' }}>
-            I'm a Computer Engineer specializing in building exceptional digital experiences. Currently focused on building responsive full-stack web applications.
+            I'm a Computer Engineer passionate about AI/ML, full-stack development, and innovative software solutions. With expertise spanning from deep learning and computer vision to web applications and mobile development, I create cutting-edge digital experiences that bridge the gap between complex algorithms and user-friendly interfaces.
           </p>
           <div className="d-flex gap-4">
             <motion.div

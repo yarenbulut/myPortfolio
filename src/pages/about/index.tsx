@@ -1,7 +1,5 @@
 import React from "react";
 import "./style.css";
-import { Helmet, HelmetProvider } from "react-helmet-async";
-import { meta, dataabout, worktimeline, skills, services } from "../../content_option";
 import { Container, Row, Col } from "react-bootstrap";
 import { motion } from 'framer-motion';
 
@@ -71,8 +69,10 @@ const About = () => {
           <Col lg={8}>
             <div className="mb-5">
               <p className="lead text-secondary mb-4">
-                Hi! I'm Yaren, a passionate Full Stack Developer based in Istanbul, Turkey. 
-                I love creating beautiful and functional web applications that provide great user experiences.
+                Hi! I'm Yaren, a Computer Engineer based in Istanbul, Turkey, with a passion for artificial intelligence, machine learning, and full-stack development. My journey spans from cutting-edge AI research in computer vision and steganalysis to practical applications in web development, mobile apps, and enterprise solutions. I specialize in bridging complex technical concepts with user-friendly implementations, creating innovative solutions that solve real-world problems.
+              </p>
+              <p className="text-secondary mb-4">
+                With expertise in Python, Java, React, and various AI/ML frameworks, I've developed projects ranging from autonomous AI agents and no-code analytics platforms to full-stack web applications and mobile health solutions. My academic background in Computer Engineering, combined with hands-on industry experience, enables me to approach problems from both theoretical and practical perspectives.
               </p>
             </div>
 
