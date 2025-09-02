@@ -69,7 +69,12 @@ const Home = () => {
                   Türk mühendislerin alnında, Cumhuriyet istikbalini aydınlatan ışık parlar.
                 </p>
                 <footer className="quote-author">
-                  <cite className="author-name">Mustafa Kemal Atatürk</cite>
+                  <object
+                    data="https://upload.wikimedia.org/wikipedia/commons/4/46/Signature_of_Mustafa_Kemal_Atat%C3%BCrk.svg"
+                    type="image/svg+xml"
+                    className="ataturk-signature"
+                    aria-label="Mustafa Kemal Atatürk imzası"
+                  ></object>
                 </footer>
               </blockquote>
             </div>
