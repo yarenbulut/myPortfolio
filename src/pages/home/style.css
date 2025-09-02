@@ -140,4 +140,116 @@
     font-size: 0.875rem;
   }
 }
+
+/* Atatürk Quote Section Styles */
+.quote-section {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, rgba(74, 222, 128, 0.05) 100%);
+  border-top: 1px solid rgba(74, 222, 128, 0.1);
+  border-bottom: 1px solid rgba(74, 222, 128, 0.1);
+  position: relative;
+}
+
+.quote-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 30% 50%, rgba(99, 102, 241, 0.03) 0%, transparent 50%),
+              radial-gradient(circle at 70% 50%, rgba(74, 222, 128, 0.03) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.ataturk-quote {
+  position: relative;
+  padding: 2rem;
+  margin: 0;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 1rem;
+  border: 1px solid rgba(74, 222, 128, 0.1);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.ataturk-quote::before {
+  content: '"';
+  position: absolute;
+  top: -0.5rem;
+  left: 1rem;
+  font-size: 4rem;
+  color: var(--accent);
+  opacity: 0.3;
+  font-family: serif;
+  line-height: 1;
+}
+
+.quote-text {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  line-height: 1.6;
+  font-style: italic;
+  margin-bottom: 1.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.quote-author {
+  margin: 0;
+  text-align: right;
+}
+
+.author-name {
+  font-size: 1rem;
+  color: var(--accent);
+  font-weight: 600;
+  font-style: normal;
+  position: relative;
+}
+
+.author-name::before {
+  content: '— ';
+  color: var(--text-secondary);
+  font-weight: 400;
+}
+
+/* Responsive Design for Quote Section */
+@media (max-width: 768px) {
+  .quote-section {
+    padding: 3rem 1rem;
+  }
+  
+  .ataturk-quote {
+    padding: 1.5rem;
+  }
+  
+  .quote-text {
+    font-size: 1.1rem;
+  }
+  
+  .ataturk-quote::before {
+    font-size: 3rem;
+    top: -0.25rem;
+    left: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .quote-section {
+    padding: 2rem 0.5rem;
+  }
+  
+  .ataturk-quote {
+    padding: 1.25rem;
+  }
+  
+  .quote-text {
+    font-size: 1rem;
+  }
+  
+  .author-name {
+    font-size: 0.9rem;
+  }
+}
   

@@ -49,6 +49,29 @@ const Home = () => {
           />
         </div>
       </div>
+      
+      {/* Atatürk Quote Section */}
+      <motion.div 
+        className="quote-section text-center py-5"
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.5, duration: 0.8 }}
+      >
+        <div className="container">
+          <div className="row justify-content-center">
+            <div className="col-lg-8">
+              <blockquote className="ataturk-quote">
+                <p className="quote-text mb-3">
+                  "Türk mühendislerin alnında, Cumhuriyet istikbalini aydınlatan ışık parlar."
+                </p>
+                <footer className="quote-author">
+                  <cite className="author-name">Mustafa Kemal Atatürk</cite>
+                </footer>
+              </blockquote>
+            </div>
+          </div>
+        </div>
+      </motion.div>
     </section>
   );
 };
