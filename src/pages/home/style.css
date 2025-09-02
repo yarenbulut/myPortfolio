@@ -192,13 +192,7 @@
   font-weight: 400;
 }
 
-.ataturk-signature {
-  width: 220px;
-  height: auto;
-  display: inline-block;
-  margin-top: 1rem;
-  filter: brightness(0) saturate(100%) invert(27%) sepia(51%) saturate(2878%) hue-rotate(346deg) brightness(104%) contrast(97%);
-}
+
 
 /* Responsive Design for Quote Section */
 @media (max-width: 768px) {
@@ -224,10 +218,6 @@
   
   .author-name {
     font-size: 0.9rem;
-  }
-  
-  .ataturk-signature {
-    width: 180px;
   }
 }
   
