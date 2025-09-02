@@ -183,7 +183,7 @@
   font-size: 1rem;
   color: var(--accent);
   font-weight: 500;
-  font-style: normal;
+  font-style: italic;
 }
 
 .author-name::before {

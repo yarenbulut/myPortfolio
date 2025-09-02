@@ -66,7 +66,7 @@ const Home = () => {
             <div className="col-lg-10">
               <blockquote className="ataturk-quote text-center">
                 <p className="quote-text">
-                  "Türk mühendislerin alnında, Cumhuriyet istikbalini aydınlatan ışık parlar."
+                  Türk mühendislerin alnında, Cumhuriyet istikbalini aydınlatan ışık parlar.
                 </p>
                 <footer className="quote-author">
                   <cite className="author-name">Mustafa Kemal Atatürk</cite>
