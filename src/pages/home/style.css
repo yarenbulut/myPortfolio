@@ -39,8 +39,12 @@
   background: linear-gradient(135deg, var(--bg-dark) 0%, var(--bg-darker) 100%);
   position: relative;
   overflow: hidden;
+}
+
+.hero-section .container {
   display: flex;
   align-items: center;
+  min-height: calc(100vh - 80px);
 }
 
 .hero-section::before {
